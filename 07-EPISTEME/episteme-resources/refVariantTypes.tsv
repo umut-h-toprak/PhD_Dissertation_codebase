@@ -1,0 +1,58 @@
+variantTypeIndex	variantType
+0	LOH
+1	UTR3 SNV
+2	UTR3 deletion
+3	UTR3 insertion
+4	UTR5 SNV
+5	UTR5 deletion
+6	UTR5 insertion
+7	ampgain
+8	directSV
+9	downstream SNV
+10	downstream deletion
+11	downstream insertion
+12	frameshift deletion
+13	frameshift insertion
+14	gain
+15	homoloss
+16	indelTadOffset0
+17	indelTadOffset1
+18	indelTadOffset2
+19	indelTadOffset3
+20	intronic deletion
+21	intronic insertion
+22	loss
+23	ncRNA_UTR5 insertion
+24	ncRNA_exonic SNV
+25	ncRNA_exonic deletion
+26	ncRNA_exonic insertion
+27	ncRNA_intronic deletion
+28	ncRNA_intronic insertion
+29	ncRNA_splicing SNV
+30	ncRNA_splicing deletion
+31	ncRNA_splicing insertion
+32	nonframeshift deletion
+33	nonframeshift insertion
+34	nonsynonymous SNV
+35	splicing SNV
+36	splicing deletion
+37	splicing insertion
+38	stopgain SNV
+39	stopgain deletion
+40	stopgain insertion
+41	stoploss SNV
+42	stoploss deletion
+43	stoploss insertion
+44	svTadOffset0
+45	svTadOffset1
+46	svTadOffset2
+47	svTadOffset3
+48	synonymous SNV
+49	unknown SNV
+50	unknown deletion
+51	unknown insertion
+52	upstream SNV
+53	upstream deletion
+54	upstream insertion
+55	intergenic deletion
+56	intergenic insertion

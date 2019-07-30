@@ -1,0 +1,17 @@
+rm -rf sophiaMref
+mkdir -p sophiaMref/src
+cd sophiaMref
+
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/MasterRefProcessor.d" -MT"src/MasterRefProcessor.o" -o "src/MasterRefProcessor.o" "../src/MasterRefProcessor.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/MrefEntry.d" -MT"src/MrefEntry.o" -o "src/MrefEntry.o" "../src/MrefEntry.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"sophiaMref.d" -MT"sophiaMref.o" -o "sophiaMref.o" "../sophiaMref.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/DeFuzzier.d" -MT"src/DeFuzzier.o" -o "src/DeFuzzier.o" "../src/DeFuzzier.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/SuppAlignmentAnno.d" -MT"src/SuppAlignmentAnno.o" -o "src/SuppAlignmentAnno.o" "../src/SuppAlignmentAnno.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/ChrConverter.d" -MT"src/ChrConverter.o" -o "src/ChrConverter.o" "../src/ChrConverter.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/BreakpointReduced.d" -MT"src/BreakpointReduced.o" -o "src/BreakpointReduced.o" "../src/BreakpointReduced.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/Breakpoint.d" -MT"src/Breakpoint.o" -o "src/Breakpoint.o" "../src/Breakpoint.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/SuppAlignment.d" -MT"src/SuppAlignment.o" -o "src/SuppAlignment.o" "../src/SuppAlignment.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/GermlineMatch.d" -MT"src/GermlineMatch.o" -o "src/GermlineMatch.o" "../src/GermlineMatch.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/MrefMatch.d" -MT"src/MrefMatch.o" -o "src/MrefMatch.o" "../src/MrefMatch.cpp"
+
+g++ -static -static-libgcc -static-libstdc++ -flto -o "sophiaMref" ./src/SuppAlignmentAnno.o ./src/DeFuzzier.o ./src/MrefEntry.o ./src/MasterRefProcessor.o ./src/ChrConverter.o ./src/Breakpoint.o ./src/BreakpointReduced.o ./src/MrefMatch.o ./src/SuppAlignment.o  ./src/GermlineMatch.o ./sophiaMref.o   -lz -lboost_system -lboost_iostreams -lboost_program_options

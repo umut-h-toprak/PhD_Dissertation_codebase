@@ -1,0 +1,6 @@
+variantTypeIndex	integer	UINDEX
+variantType	text	
+locationInPhenotypePlots	integer	
+superGroupName	text	
+colourId	text	
+uniqueLoc	text	

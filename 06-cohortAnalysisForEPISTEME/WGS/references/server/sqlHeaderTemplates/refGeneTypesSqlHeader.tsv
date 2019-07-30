@@ -1,0 +1,3 @@
+geneTypeIndex	integer	UINDEX
+geneType	text	
+geneSupertype	text	

@@ -1,0 +1,5 @@
+geneFusionIndex	integer	UINDEX
+gene1	integer	INDEX
+gene2	integer	INDEX
+matchedOrientation	integer	
+donor	integer	INDEX

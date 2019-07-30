@@ -1,0 +1,28 @@
+volcanoItemIndex	integer	UINDEX
+rppa	integer	INDEX
+pValLog10	float	
+log2FcTrimean	float	
+log2FcMean	float	
+numSelected	integer	
+numInverted	integer	
+numSwitched	integer	
+0	boolean	INDEX
+1	boolean	INDEX
+2	boolean	INDEX
+3	boolean	INDEX
+4	boolean	INDEX
+5	boolean	INDEX
+6	boolean	INDEX
+7	boolean	INDEX
+8	boolean	INDEX
+9	boolean	INDEX
+10	boolean	INDEX
+11	boolean	INDEX
+12	boolean	INDEX
+13	boolean	INDEX
+14	boolean	INDEX
+15	boolean	INDEX
+16	boolean	INDEX
+17	boolean	INDEX
+18	boolean	INDEX
+19	boolean	INDEX

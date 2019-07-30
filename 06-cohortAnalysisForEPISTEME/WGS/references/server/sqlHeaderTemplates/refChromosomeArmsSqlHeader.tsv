@@ -1,0 +1,11 @@
+chromosomeArmIndex	integer	UINDEX
+chromosomeIndex	integer	INDEX
+startPos	integer	
+endPos	integer	
+chromosomeArmSize	integer	
+chromosomeArmName	text	
+firstTadIndex	integer	
+lastTadIndex	integer	
+firstCytobandIndex	integer	
+lastCytobandIndex	integer	
+coefficientInit	float	

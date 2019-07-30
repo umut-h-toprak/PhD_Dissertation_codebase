@@ -1,0 +1,65 @@
+variantTypeIndex	variantType	locationInPhenotypePlots	superGroupName	colourId	uniqueLoc	variantVizTypeIndex
+0	LOH	4	LOH	0	10	99
+1	UTR3 SNV	3	UTR3 SmallVar	0	8	8
+2	UTR3 deletion	3	UTR3 SmallVar	0	8	4
+3	UTR3 insertion	3	UTR3 SmallVar	0	8	5
+4	UTR5 SNV	5	UTR5 SmallVar	0	13	8
+5	UTR5 deletion	5	UTR5 SmallVar	0	13	4
+6	UTR5 insertion	5	UTR5 SmallVar	0	13	5
+7	ampgain	6	Amp	14	16	99
+8	directSV	1	Direct SvHit	0	1	99
+9	downstream SNV	3	Downstream SmallVar	11	9	8
+10	downstream deletion	3	Downstream SmallVar	11	9	4
+11	downstream insertion	3	Downstream SmallVar	11	9	5
+12	frameshift deletion	2	Truncating Indel	10	3	4
+13	frameshift insertion	2	Truncating Indel	10	3	5
+14	gain	6	cnGain	12	15	99
+15	homoloss	4	Homdel	16	12	99
+16	indelTadOffset0	1	OffGene Indel	17	2	99
+17	indelTadOffset1	1	OffGene Indel	17	2	99
+18	indelTadOffset2	1	OffGene Indel	17	2	99
+19	indelTadOffset3	1	OffGene Indel	17	2	99
+20	intronic deletion	9	NA	0	99	4
+21	intronic insertion	9	NA	0	99	5
+22	loss	4	cnLoss	13	11	99
+23	ncRNA_UTR5 insertion	5	UTR5 SmallVar	0	13	5
+24	ncRNA_exonic SNV	2	Nontruncating SNV	11	4	8
+25	ncRNA_exonic deletion	2	Nontruncating Indel	13	6	4
+26	ncRNA_exonic insertion	2	Nontruncating Indel	13	6	5
+27	ncRNA_intronic deletion	9	NA	0	99	4
+28	ncRNA_intronic insertion	9	NA	0	99	5
+29	ncRNA_splicing SNV	2	Splicing SmallVar	12	5	8
+30	ncRNA_splicing deletion	2	Splicing SmallVar	12	5	4
+31	ncRNA_splicing insertion	2	Splicing SmallVar	12	5	5
+32	nonframeshift deletion	2	Nontruncating Indel	13	6	4
+33	nonframeshift insertion	2	Nontruncating Indel	13	6	5
+34	nonsynonymous SNV	2	Nontruncating SNV	11	4	8
+35	splicing SNV	2	Splicing SmallVar	12	5	8
+36	splicing deletion	2	Splicing SmallVar	12	5	4
+37	splicing insertion	2	Splicing SmallVar	12	5	5
+38	stopgain SNV	2	Truncating SNV	18	7	8
+39	stopgain deletion	2	Truncating Indel	10	3	4
+40	stopgain insertion	2	Truncating Indel	10	3	5
+41	stoploss SNV	2	Truncating SNV	18	7	8
+42	stoploss deletion	2	Nontruncating Indel	13	6	4
+43	stoploss insertion	2	Nontruncating Indel	13	6	5
+44	svTadOffset0	1	OffGene SvHit	14	1	99
+45	svTadOffset1	1	OffGene SvHit	14	1	99
+46	svTadOffset2	1	OffGene SvHit	14	1	99
+47	svTadOffset3	1	OffGene SvHit	14	1	99
+48	synonymous SNV	2	Nontruncating SNV	12	6	8
+49	unknown SNV	9	NA	0	99	8
+50	unknown deletion	9	NA	0	99	4
+51	unknown insertion	9	NA	0	99	5
+52	upstream SNV	5	Upstream SmallVar	14	14	8
+53	upstream deletion	5	Upstream SmallVar	14	14	4
+54	upstream insertion	5	Upstream SmallVar	14	14	5
+55	intergenic deletion	9	NA	0	99	4
+56	intergenic insertion	9	NA	0	99	5
+57	DoubleHit (CNV/LOH+Functional SmallVar)	0	NA	0	0	99
+58	DoubleHit (CNV/LOH+Functional SmallVar/Direct SV)	0	NA	0	0	99
+59	DoubleHit (SmallVar+Direct SV)	0	NA	0	0	99
+60	gene fusion correct orientation	0	NA	1	0	99
+61	gene fusion incorrect orientation	0	NA	1	0	99
+62	case with unavailable variant data	0	NA	15	0	99
+63	blank	0	NA	15	0	99

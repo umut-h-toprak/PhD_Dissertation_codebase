@@ -1,0 +1,8 @@
+snvIndex	integer	UINDEX
+chrIndex	integer	
+pos	integer	
+ref	text	
+alt	text	
+gene	text	INDEX
+smallVarType	integer	
+donor	integer	INDEX

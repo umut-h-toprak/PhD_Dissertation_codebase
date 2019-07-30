@@ -1,0 +1,6 @@
+chromosomeIndex	integer	UINDEX
+chrName	text	
+chrSize	integer	
+gapSize	integer	
+firstCytobandIndex	integer	
+lastCytobandIndex	integer	

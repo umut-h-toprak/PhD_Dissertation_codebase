@@ -1,0 +1,3 @@
+gene	integer	INDEX
+donor	integer	
+variantType	integer	

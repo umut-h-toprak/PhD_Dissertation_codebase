@@ -1,0 +1,48 @@
+svIndex	integer	UINDEX
+startChrIndex	integer	
+endChrIndex	integer	
+startPos	integer	
+endPos	integer	
+eventScore	integer	
+eventType	integer	
+clonality	float	
+source1	text	
+source2	text	
+overhang1	text	
+overhang2	text	
+startCytobandIndex	integer	INDEX
+endCytobandIndex	integer	INDEX
+gene1	text	
+nearestGeneUpstream1	text	
+nearestGeneUpstreamDistance1	integer	
+nearestCancerGeneUpstream1	text	
+nearestCancerGeneUpstreamDistance1	integer	
+nearestGeneDownstream1	text	
+nearestGeneDownstreamDistance1	integer	
+nearestCancerGeneDownstream1	text	
+nearestCancerGeneDownstreamDistance1	integer	
+gene2	text	
+nearestGeneUpstream2	text	
+nearestGeneUpstreamDistance2	integer	
+nearestCancerGeneUpstream2	text	
+nearestCancerGeneUpstreamDistance2	integer	
+nearestGeneDownstream2	text	
+nearestGeneDownstreamDistance2	integer	
+nearestCancerGeneDownstream2	text	
+nearestCancerGeneDownstreamDistance2	integer	
+dbSuperEntries1	text	
+dbSuperEntries2	text	
+startFragileSiteIndex	integer	
+endFragileSiteIndex	integer	
+maxRecurrence	integer	INDEX
+maxIntraPatientRecurrence	integer	
+preRemapStartChrIndex	integer	
+preRemapEndChrIndex	integer	
+preRemapStartPos	integer	
+preRemapEndPos	integer	
+directHits	text	
+tadIndicesOffset0	text	
+tadIndicesOffset1	text	
+tadIndicesOffset2	text	
+tadIndicesOffset3	text	
+donor	integer	INDEX

@@ -1,0 +1,12 @@
+rm -rf sophia
+mkdir -p sophia/src
+cd sophia
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/Alignment.d" -MT"src/Alignment.o" -o "src/Alignment.o" "../src/Alignment.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/Breakpoint.d" -MT"src/Breakpoint.o" -o "src/Breakpoint.o" "../src/Breakpoint.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/ChosenBp.d" -MT"src/ChosenBp.o" -o "src/ChosenBp.o" "../src/ChosenBp.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/ChrConverter.d" -MT"src/ChrConverter.o" -o "src/ChrConverter.o" "../src/ChrConverter.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/SamSegmentMapper.d" -MT"src/SamSegmentMapper.o" -o "src/SamSegmentMapper.o" "../src/SamSegmentMapper.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/Sdust.d" -MT"src/Sdust.o" -o "src/Sdust.o" "../src/Sdust.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -Wextra -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"src/SuppAlignment.d" -MT"src/SuppAlignment.o" -o "src/SuppAlignment.o" "../src/SuppAlignment.cpp"
+g++ -std=c++1z -I"../include" -O3 -Wall -static -static-libgcc -static-libstdc++ -flto -c -fmessage-length=0 -Wno-attributes -MMD -MP -MF"sophia.d" -MT"sophia.o" -o "sophia.o" "../sophia.cpp"
+g++ -static -static-libgcc -static-libstdc++ -flto -o "sophia"  ./src/Alignment.o ./src/Breakpoint.o ./src/ChosenBp.o ./src/ChrConverter.o ./src/SamSegmentMapper.o ./src/Sdust.o ./src/SuppAlignment.o  ./sophia.o   -lboost_program_options

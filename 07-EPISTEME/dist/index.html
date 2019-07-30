@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EPISTEME</title>
+    <!--<link rel="stylesheet" href="excel-bootstrap-table-filter-style.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
+    <link rel="stylesheet" href="https://rawgit.com/wenzhixin/bootstrap-table-fixed-columns/master/bootstrap-table-fixed-columns.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jQuery-QueryBuilder/dist/css/query-builder.default.min.css">
+<link href="main.css" rel="stylesheet"></head>
+<body id="body">
+<div class="row-fluid">
+    <div class="col-md-8 nopadding">
+        <div id="displayPorts" class="row-fluid">
+            <div class="col-md-1 nopadding">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active" id="mainContentControl" style="display: none">
+                        <a href="#mainContent" id="mainContentPane" data-toggle="pill">Cohort-Wide Variants and Recurrence</a>
+                    </li>
+                    <li id="cohortMetadataContentControl" style="display:none">
+                        <a href="#cohortMetadataContent" id="cohortMetadataContentPane" data-toggle="pill">Cohort Metadata and Subcohort Analysis</a>
+                    </li>
+                    <li id="flexiblePlotsContentPaneControl" style="display: none">
+                        <a href="#flexiblePlotsContent" id="flexiblePlotsContentPane" data-toggle="pill">Flexible Plot Builder</a>
+                    </li>
+                    <li id="heatmapContentPaneControl" style="display: none">
+                        <a href="#heatmapContent" id="heatmapContentPane" data-toggle="pill">Heatmap Builder</a>
+                    </li>
+                    <li id="survivalContentPaneControl" style="display: none">
+                        <a href="#survivalContent" id="survivalContentPane" data-toggle="pill">Survival Analysis</a>
+                    </li>
+                    <li id="phenotypeExpressionContentPaneControl" style="display: none">
+                        <a href="#phenotypeExpressionContent" id="phenotypeExpressionContentPane" data-toggle="pill">Expression Analysis</a>
+                    </li>
+                    <li id="variantGeneExpressionVolcanoContentPaneControl" style="display: none">
+                        <a href="#variantGeneExpressionVolcanoContentPre" id="variantGeneExpressionVolcanoContentPane" data-toggle="pill">Variant - Gene Expression Volcano</a>
+                    </li>
+                    <li id="correlationGeneExpressionVolcanoContentPaneControl" style="display: none">
+                        <a href="#correlationGeneExpressionVolcanoContentPre" id="correlationGeneExpressionVolcanoContentPane" data-toggle="pill">Gene Expression Correlation</a>
+                    </li>
+                    <li id="subcohortGeneExpressionVolcanoContentPaneControl" style="display: none">
+                        <a href="#subcohortGeneExpressionVolcanoContentPre" id="subcohortGeneExpressionVolcanoContentPane" data-toggle="pill">Subcohort - Gene Expression Volcano</a>
+                    </li>
+                    <li id="subcohortMutexVolcanoContentPaneControl" style="display: none">
+                        <a href="#subcohortMutexVolcanoContentPre" id="subcohortMutexVolcanoContentPane" data-toggle="pill">Subcohort - Variant Mutex Volcano</a>
+                    </li>
+                    <li id="variantRppaExpressionVolcanoContentPaneControl" style="display: none">
+                        <a href="#variantRppaExpressionVolcanoContentPre" id="variantRppaExpressionVolcanoContentPane" data-toggle="pill">Variant - Rppa Expression Volcano</a>
+                    </li>
+                    <li id="subcohortRppaExpressionVolcanoContentPaneControl" style="display: none">
+                        <a href="#subcohortRppaExpressionVolcanoContentPre" id="subcohortRppaExpressionVolcanoContentPane" data-toggle="pill">Subcohort - Rppa Expression Volcano</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-11" id="visualizations">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" id="svgDownloader" style="display: none;z-index:998">
+                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="tab-content" id="mainSide">
+                    <div class="inline-block" id="introInfo">
+                        <span class="row justify-content-center align-middle">
+                            <p class="text-center">EPISTEME is an analysis and visualization portal for integrative omics data.</p>
+                        </span>
+                    </div>
+                    <div class="tab-pane active" id="mainContent">
+
+                    </div>
+                    <div class="tab-pane" id="cohortMetadataContent">
+                        <div id="cohortMetadataContainer" class="container-fluid">
+                            <table id="cohortMetadataTable" class="table table-bordered table-intel"
+                                   width="100%"
+                                   data-show-columns="true"
+                                   data-fixed-columns="true"
+                                   data-fixed-number="1" style="overflow-x: auto;overflow-y: auto;height:auto !important;">
+                            </table>
+                            <!--<table id="cohortMetadataTable" class="table" width="100%" cellspacing="0"></table>-->
+                        </div>
+                        <a href="https://github.com/wenzhixin/bootstrap-table" target="_blank">Github</a>
+                    </div>
+                    <div class="tab-pane" id="flexiblePlotsContent" style="text-align:center;">
+                        <div class="tab-pane" id="flexiblePlotsContentMain" style="text-align:center;">
+
+                        </div>
+                        <br>
+                        <div class="tab-pane" id="flexiblePlotsContentHeatmap" style="text-align:center;">
+
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="heatmapContent" style="text-align:center;">
+
+                    </div>
+                    <div class="tab-pane" id="survivalContent" style="text-align:center;">
+                    </div>
+                    <div class="tab-pane" id="phenotypeExpressionContent" style="text-align:center;">
+                        <div class="container-fluid" id="singleGeneExpressionSelectorGroup" style="display: none">
+                            <div class="card card-block">
+                                <div class="input-group">
+                                    <select class="form-control" title="singleGeneExpressionSelection" id="singleGeneExpressionSelector">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid" id="geneExpressionContent">
+                        </div>
+                        <div class="container-fluid" id="singleRppaExpressionSelectorGroup" style="display: none">
+                            <div class="card card-block">
+                                <div class="input-group">
+                                    <select class="form-control" title="singleRppaExpressionSelection" id="singleRppaExpressionSelector">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid" id="rppaExpressionContent">
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="variantGeneExpressionVolcanoContentPre" style="text-align:center;">
+                        <div class="container-fluid" id="variantGeneExpressionVolcanoContent">
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="correlationGeneExpressionVolcanoContentPre" style="text-align:center;">
+                        <div class="container-fluid" id="correlationGeneExpressionVolcanoContent">
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="subcohortGeneExpressionVolcanoContentPre" style="text-align:center;">
+                        <div class="container-fluid" id="subcohortGeneExpressionVolcanoContent">
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="subcohortMutexVolcanoContentPre" style="text-align:center;">
+                        <div class="container-fluid" id="subcohortMutexVolcanoContent">
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="variantRppaExpressionVolcanoContentPre" style="text-align:center;">
+                        <div class="container-fluid" id="variantRppaExpressionVolcanoContent">
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="subcohortRppaExpressionVolcanoContentPre" style="text-align:center;">
+                        <div class="container-fluid" id="subcohortRppaExpressionVolcanoContent">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 nopadding">
+        <div id="annotationPorts" class="container-fluid">
+            <ul class="nav nav-tabs">
+                <li id="cytobandDescriptionPaneControl" style="display: none">
+                    <a  href="#cytobandDescriptionPane" data-toggle="tab">Cytoband Desc.</a>
+                </li>
+                <li id="tadDescriptionPaneControl" style="display: none">
+                    <a  href="#tadDescriptionPane" data-toggle="tab">Tad Desc.</a>
+                </li>
+                <li id="geneRecDescriptionPaneControl" style="display: none">
+                    <a href="#geneRecDescriptionPane" data-toggle="tab">Gene Recurrence. Desc.</a>
+                </li>
+                <li id="svDescriptionPaneControl" style="display: none">
+                    <a href="#svDescriptionPane" data-toggle="tab">SV Desc.</a>
+                </li>
+                <li id="vdjSvDescriptionPaneControl" style="display: none">
+                    <a href="#vdjSvDescriptionPane" data-toggle="tab">Vdj-SV Desc.</a>
+                </li>
+                <li id="midSizedSvDescriptionPaneControl" style="display: none">
+                    <a href="#midSizedSvDescriptionPane" data-toggle="tab">Mid-sized-SV Desc.</a>
+                </li>
+                <li id="smallVariantDescriptionPaneControl" style="display: none">
+                    <a href="#smallVariantDescriptionPane" data-toggle="tab">SmallVar Desc.</a>
+                </li>
+                <li id="volcanoGeneDescriptionPaneControl" style="display: none">
+                    <a href="#volcanoGeneDescriptionPane" data-toggle="tab">Gene Desc.</a>
+                </li>
+                <li id="helpPaneControl" style="display: none">
+                    <a href="#helpPane" data-toggle="tab"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
+                </li>
+                <li id="cohortDescriptionPaneControl" style="display: none">
+                    <a href="#cohortDescriptionPane" data-toggle="tab">Cohort Description</a>
+                </li>
+                <li class="active">
+                    <a href="#controlsPane" data-toggle="tab">Controls</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="rightSide">
+                <div class="tab-pane" id="cytobandDescriptionPane">
+                    <div class="container-fluid">
+                        <div id="cytobandSweep" class="row justify-content-between">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default" id="cytobandSweepLeft">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous Cytoband
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <p></p>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default" id="cytobandSweepRight">
+                                    Next Cytoband <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="descriptionContainer" id="cytobandDescription"></p>
+                    <div class="input-group"><label for="coeffCurrentCytoband" class="col-form-label" id="coeffCurrentCytobandLabel"></label> <input type="number" id="coeffCurrentCytoband" name="coeffCurrentCytoband" data-provide="slider" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="7" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div>
+                    <button id="markCytobandFromDesc" type="button" class="btn btn-secondary">Mark Cytoband (rclick to remove)</button>
+                    <br>
+                    <button id="fetchSmallVariantsFromCytoband" type="button" class="btn btn-success">Fetch Small Variants</button>
+                    <br>
+                    <div class="input-group panel panel-default" id="cytobandSelectionCategories">
+                        <select class="form-control" title="geneInCytobandSelection" id="geneInCytobandSelector">
+                            <option>Select Gene</option>
+                        </select>
+                        <button id="submitCytobandChoices" type="button" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tadDescriptionPane">
+                    <div class="container-fluid">
+                        <div id="tadSweep" class="row justify-content-between">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default" id="tadSweepLeft">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Previous TAD
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <p></p>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default" id="tadSweepRight">
+                                    Next TAD <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="descriptionContainer" id="tadDescription"></p>
+                    <br>
+                    <div class="input-group"><label for="coeffCurrentTad" class="col-form-label" id="coeffCurrentTadLabel"></label> <input type="number" id="coeffCurrentTad" name="coeffCurrentTad" data-provide="slider" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="7" data-slider-tooltip="hide" data-slider-orientation="horizontal"><br></div>
+                    <br>
+                    <button id="fetchSmallVariantsFromTad" type="button" class="btn btn-success">Fetch Small Variants</button>
+                    <br>
+                    <div class="row-fluid panel panel-default" id="subcohortSelectionFromTadRecurrenceGroup">
+                        <p>Subcohort Definition</p>
+                        <div class="row-fluid" id="subcohortSelectionFromTadRecurrenceDescription"></div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="tadRecurrenceSubcohortSelectionName" placeholder="Name Selection (enter to confirm)">
+                        </div>
+                        <div class="col-md-6">
+                            <button id="createSubcohortFromTadRecurrence" type="button" class="btn btn-secondary">Create Subcohort From Visible</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="geneRecDescriptionPane">
+                    <p class="descriptionContainer" id="geneRecDescription"></p>
+                    <div class="input-group"><label for="coeffCurrentGene" class="col-form-label" id="coeffCurrentGeneLabel"></label> <input type="number" id="coeffCurrentGene" name="coeffCurrentTad" data-provide="slider" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="7" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div>
+                    <button id="addGeneExpressionToMetadataFromDesc" type="button" class="btn btn-secondary">Add Gene Expression to Metadata</button>
+                    <button id="addGeneVariantsToMetadataFromDesc" type="button" class="btn btn-secondary">Add Gene Variants to Metadata</button>
+                    <button id="markGeneFromDesc" type="button" class="btn btn-secondary">Mark Gene (rclick to remove)</button>
+                    <button id="fetchSmallVariantsFromGene" type="button" class="btn btn-success">Fetch Small Variants</button>
+                    <br>
+                    <div class="row-fluid panel panel-default" id="subcohortSelectionFromGeneRecurrenceGroup">
+                        <p>Subcohort Definition</p>
+                        <div class="row-fluid" id="subcohortSelectionFromGeneRecurrenceDescription"></div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="geneRecurrenceSubcohortSelectionName" placeholder="Name Selection (enter to confirm)">
+                        </div>
+                        <div class="col-md-6">
+                            <button id="createSubcohortFromGeneRecurrence" type="button" class="btn btn-secondary" style="display: none;">Subcohort from Visible</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="svDescriptionPane">
+                    <div class="container-fluid">
+                        <div id="svSweep" class="row justify-content-between">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default" id="svSweepLeft">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Previous Variant
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <p id="svCounter"></p>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default" id="svSweepRight">
+                                    Next Variant <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="svBlacklist" type="button" class="btn btn-secondary">Blacklist Variant</button>
+                    <p class="descriptionContainer" id="svDescription"></p>
+                </div>
+                <div class="tab-pane" id="vdjSvDescriptionPane">
+                    <div class="container-fluid">
+                        <div id="vdjSvSweep" class="row justify-content-between">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default" id="vdjSvSweepLeft">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Previous Variant
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <p id="vdjSvCounter"></p>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default" id="vdjSvSweepRight">
+                                    Next Variant <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="vdjSvBlacklist" type="button" class="btn btn-secondary">Blacklist Variant</button>
+                    <p class="descriptionContainer" id="vdjSvDescription"></p>
+                </div>
+                <div class="tab-pane" id="midSizedSvDescriptionPane">
+                    <div class="container-fluid">
+                        <div id="midSizedSvSweep" class="row justify-content-between">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default" id="midSizedSvSweepLeft">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Previous Variant
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <p id="midSizedSvCounter"></p>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default" id="midSizedSvSweepRight">
+                                    Next Variant <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="midSizedSvBlacklist" type="button" class="btn btn-secondary">Blacklist Variant</button>
+                    <p class="descriptionContainer" id="midSizedSvDescription"></p>
+                </div>
+                <div class="tab-pane" id="smallVariantDescriptionPane">
+                    <div class="container-fluid">
+                        <div id="smallVariantSweep" class="row justify-content-between">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default" id="smallVariantSweepLeft">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Previous Variant
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <p id="smallVariantCounter"></p>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default" id="smallVariantSweepRight">
+                                    Next Variant <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="descriptionContainer" id="smallVariantDescription"></p>
+                    <button id="smallVariantBlacklist" type="button" class="btn btn-secondary">Blacklist Small Variant</button>
+                </div>
+                <div class="tab-pane" id="volcanoGeneDescriptionPane">
+                    <p class="descriptionContainer" id="volcanoGeneDescription"></p>
+                    <div class="btn-group">
+                        <div class="row-fluid">
+                            <button id="volcanoDetailedView" type="button" class="btn btn-primary">Detailed View</button>
+                            <button id="volcanoGoToGene" type="button" class="btn btn-primary">Go to Gene in Variant Landscape Plot</button>
+                        </div>
+                        <div class="row-fluid">
+                            <button id="volcanoClearGene" type="button" class="btn btn-secondary">Clear Gene</button>
+                            <button id="volcanoHideGene" type="button" class="btn btn-secondary">Hide Gene on Volcano</button>
+                            <button id="volcanoPubmedGene" type="button" class="btn btn-secondary"><span class="glyphicon glyphicon-book"></span>PubMed</button>
+                        </div>
+                        <div class="row-fluid">
+                            <button id="volcanoAddGeneExpressionToMetadata" type="button" class="btn btn-secondary">Add Gene Expression to Metadata</button>
+                            <button id="volcanoAddGeneVariantsToMetadata" type="button" class="btn btn-secondary">Add Gene Variants to Metadata</button>
+                        </div>
+                        <div class="row-fluid">
+                            <button id="volcanoSetAsTopP" type="button" class="btn btn-secondary">Set as top displayed Pval</button>
+                            <button id="volcanoSetAsTopFoldChange" type="button" class="btn btn-secondary">Set as top displayed FoldChange</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="container-fluid" id="vennContentVolcano" style="width:100%;">
+
+                    </div>
+                    <br>
+                    <div class="row" id="tadOffsetSelectorVolcanoGroup">
+                        <div class="col" style="display:inline-block">
+                            <label for="svTadOffsetSelectorVolcano" class="col-form-label">Max SV TAD-offset: </label>
+                            <select class="form-control" title="svTadOffsetSelectionVolcano" id="svTadOffsetSelectorVolcano">
+                                <option value="-1">NO</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="col" style="display:inline-block">
+                            <label for="offIndelTadOffsetSelectorVolcano" class="col-form-label">off-Indel TAD-offset: </label>
+                            <select class="form-control" title="offIndelTadOffsetSelectionVolcano" id="offIndelTadOffsetSelectorVolcano">
+                                <option value="-1">NO</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group" id="geneExpressionSelectorVolcanoGroup">
+                        <br>
+                        <select class="form-control" title="geneExpressionSelection" id="geneExpressionSelectorVolcano">
+                            <option>Select Gene</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="container-fluid" id="geneExpressionContentVolcano" style="width:100%;">
+                    </div>
+                    <div id="rppaExpressionControlsVolcano">
+                        <div class="input-group" id="rppaExpressionSelectorVolcanoGroup">
+                            <select class="form-control" title="rppaExpressionSelection" id="rppaExpressionSelectorVolcano">
+                                <option>Select Rppa</option>
+                            </select>
+                        </div>
+                        <div class="container-fluid" id="rppaExpressionContentVolcano"style="width:100%">
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+                <div class="tab-pane" id="helpPane">
+                    <p id="helpInfo">
+                    </p>
+                </div>
+                <div class="tab-pane" id="cohortDescriptionPane">
+                    <p id="cohortDescriptionInfo">
+                    </p>
+                </div>
+
+                <div class="tab-pane active" id="controlsPane">
+                    <h3 id="cohortTitle">Loading references</h3>
+                    <div class="row-fluid" id="cohortSelectorGroup" style="display: none">
+                        <select class="form-control" title="cohortSelection" id="cohortSelector">
+                            <option>Select Cohort</option>
+                        </select>
+                    </div>
+                    <div class="row-fluid" id="subcohortSelectorGroup" style="display: none">
+                        <div class="row-fluid">
+                            <select class="form-control" title="subcohortSelection" id="subcohortSelector">
+                            </select>
+                        </div>
+                        <div class="row-fluid">
+                            <select class="form-control" title="subcohortSelectionDiff" id="subcohortDiffSelector">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="variantDisplayControls" style="display: none">
+                        <button id="resetFocus" type="button" class="btn btn-primary" style="display: none">Reset Selection</button>
+                        <p>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#aestheticsCollapse" aria-expanded="false" aria-controls="aestheticsCollapse">
+                                Variant Landscape Display Settings
+                            </a>
+                        </p>
+                        <div class="collapse" id="aestheticsCollapse">
+                            <div class="input-group" id="chromosomalSizeControlsGroup">
+                                <p>
+                                    <a class="btn btn-primary" data-toggle="collapse" href="#chromosomalSizeControlsCollapse" aria-expanded="false" aria-controls="chromosomalSizeControlsCollapse">
+                                        Chromosomal Size Controls
+                                    </a>
+                                </p>
+                                <div class="collapse" id="chromosomalSizeControlsCollapse">
+                                    <div class="card card-block panel panel-default" id="chromosomalSizeControls">
+                                        <div class="input-group"><label for="coeff24" class="col-form-label" id="coeff24Label">Y: </label> <input type="number" id="coeff24" name="coeff24" data-provide="slider" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                                        <div class="input-group"><label for="coeff25" class="col-form-label" id="coeff25Label">hs37d5: </label> <input type="number" id="coeff25" name="coeff25" data-provide="slider" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                                        <div class="input-group"><label for="coeff26" class="col-form-label" id="coeff26Label">MT: </label> <input type="number" id="coeff26" name="coeff26" data-provide="slider" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                                        <div class="input-group"><label for="coeff27" class="col-form-label" id="coeff27Label">NC_007605: </label> <input type="number" id="coeff27" name="coeff27" data-provide="slider" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                                        <div class="input-group"><label for="coeff28" class="col-form-label" id="coeff28Label">GL*: </label> <input type="number" id="coeff28" name="coeff28" data-provide="slider" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                                        <button id="resetChrs" type="button" class="btn btn-primary">Reset Chromosome Sizes</button><br/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group" id="chromosomeArmSizeControlsGroup">
+                                <p>
+                                    <a class="btn btn-primary" data-toggle="collapse" href="#chromosomeArmSizeControlsCollapse" aria-expanded="false" aria-controls="chromosomeArmSizeControlsCollapse">
+                                        Chromosome Arm Size Controls
+                                    </a>
+                                </p>
+                                <div class="collapse" id="chromosomeArmSizeControlsCollapse">
+                                    <div class="card card-block panel panel-default" id="chromosomeArmSizeControls">
+                                        <div class="input-group"><label for="armcoeff47" class="col-form-label" id="armcoeff47Label">Yp: </label> <input type="number" id="armcoeff47" name="coeff24" data-provide="slider" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                                        <div class="input-group"><label for="armcoeff48" class="col-form-label" id="armcoeff48Label">Yq: </label> <input type="number" id="armcoeff48" name="coeff24" data-provide="slider" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                                        <button id="resetChrArms" type="button" class="btn btn-primary">Reset Chromosome Arm Sizes</button><br/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="input-group"><label for="rotationAngleSelector" class="col-form-label" id="rotationAngleSelectorLabel">Rotation Angle: </label> <input type="number" id="rotationAngleSelector" name="rotationAngleSelector" data-provide="slider" data-slider-min="0" data-slider-max="359" data-slider-step="1" data-slider-value="0" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                            <div class="input-group panel panel-default" id="wheelControls">
+
+                            </div>
+                            <br>
+                            <div class="input-group" id="vdjTraModeGroup">
+                                <label class="custom-control custom-checkbox">
+                                    <input id="vdjTraMode" type="checkbox" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Show only T-cell Receptor and IG-Translocations</span>
+                                </label><br/>
+                                <div class="input-group" id="maxVdjGradeGroup">
+                                    <label for="maxVdjGrade" class="col-form-label" id="maxVdjGradeLabel">Max IG/T-cell Receptor Rearrangement Grade: 0</label>
+                                    <input type="number" id="maxVdjGrade" name="maxVdjGrade" data-provide="slider" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="0" data-slider-tooltip="hide" data-slider-orientation="horizontal"><br>
+                                </div>
+                            </div>
+                            <div class="panel panel-default" id="singleDonorSelectorGroup">
+                                Single Donor View
+                                <select class="form-control" title="singleDonorSelection" id="singleDonorSelector">
+                                    <option value="-1">Select Donor</option>
+                                </select>
+                                <button id="plotSingleDonor" type="button" class="btn btn-primary" style="display: none;">Plot Single Donor</button><br/>
+                            </div>
+                            <div class="card card-block panel panel-default">
+                                <div class="input-group">
+                                    <div class="input-group"><label for="minRec" class="col-form-label" id="minRecLabel"><br/>Min SV Event<br/>Recurrence: 1</label><input type="number" id="minRec" name="minRec" data-provide="slider" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div>
+                                    <div class="input-group"><label for="transparencyScaling" class="col-form-label" id="transparencyScalingLabel"><br/>Transparency<br/>Scaling: 3</label><input type="number" id="transparencyScaling" name="transparencyScaling" data-provide="slider" data-slider-min="1" data-slider-max="30" data-slider-step="1" data-slider-value="3" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div>
+                                    <div class="input-group" id="maxRecWheel1Group"><label for="maxRecWheel1" class="col-form-label" id="maxRecWheel1Label"></label><input type="number" id="maxRecWheel1" name="maxRecWheel1" data-provide="slider" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide" data-slider-orientation="horizontal"><br></div>
+                                    <div class="input-group" id="maxRecWheel2Group"><label for="maxRecWheel2" class="col-form-label" id="maxRecWheel2Label"></label><input type="number" id="maxRecWheel2" name="maxRecWheel2" data-provide="slider" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide" data-slider-orientation="horizontal"><br></div>
+                                    <div class="input-group" id="maxRecWheel3Group"><label for="maxRecWheel3" class="col-form-label" id="maxRecWheel3Label"></label><input type="number" id="maxRecWheel3" name="maxRecWheel3" data-provide="slider" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide" data-slider-orientation="horizontal"><br></div>
+                                    <div class="input-group" id="maxRecWheel4Group"><label for="maxRecWheel4" class="col-form-label" id="maxRecWheel4Label"></label><input type="number" id="maxRecWheel4" name="maxRecWheel4" data-provide="slider" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide" data-slider-orientation="horizontal"><br></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group panel panel-default" id="exportControls" style="display:none">
+                            <button id="exportVisibleSvs" type="button" class="btn btn-primary">Export Visible Svs</button>
+                            <button id="exportVisibleSmallVariants" type="button" class="btn btn-primary">Export Visible SmallVariants</button>
+                        </div>
+                    </div>
+                    <br>
+                    <p>
+                        <a class="btn btn-primary" data-toggle="collapse" href="#selectorControlsCollapse" aria-expanded="false" aria-controls="selectorControlsCollapse" id="selectorControlsCollapseControl" style="display: none">
+                            Operations on Cytobands, Genes and RPPA Antibodies
+                        </a>
+                    </p>
+                    <div class="collapse" id="selectorControlsCollapse">
+                        <div class="card card-block panel panel-default" id="selectorControls">
+                            <div class="row-fluid panel panel-default" id="chromosomeArmSelectorGroup">
+                                <div class="row-fluid">
+                                    <div class="input-group">
+                                        <label for="chromosomeArmSelector" class="col-form-label">
+                                            Find Chromosome Arm:
+                                        </label>
+                                        <input id="chromosomeArmSelector"/>
+                                    </div>
+                                </div>
+                                <div id="allChromosomeArmSelectorControls">
+                                    <div id="volcanoSpecificChromosomeArmSelectorControls" style="display: none">
+                                        <div id="mutexVolcanoSpecificChromosomeArmSelectorControls" style="display: none">
+                                            <button id="markChromosomeArmMutex" type="button" class="btn btn-success">Mark ChromosomeArm Mutex</button>
+                                            <button id="hideChromosomeArmMutex" type="button" class="btn btn-success">Hide ChromosomeArm Mutex</button>
+                                        </div>
+                                    </div>
+                                    <button id="addChromosomeArmVariantsToMetadata" type="button" class="btn btn-secondary">Add Chromosome Arm Variants to Metadata</button>
+                                </div>
+                            </div>
+                            <div class="row-fluid panel panel-default" id="cytobandSelectorGroup">
+                                <div class="row-fluid">
+                                    <div class="input-group">
+                                        <label for="cytobandSelector" class="col-form-label">
+                                            Find Cytoband:
+                                        </label>
+                                        <input id="cytobandSelector"/>
+                                    </div>
+                                </div>
+                                <div id="allCytobandSelectorControls">
+                                    <div id="variantVizSpecificCytobandSelectorControls">
+                                        <button id="markCytoband" type="button" class="btn btn-secondary">Mark Cytoband (rclick to remove)</button>
+                                    </div>
+                                    <div id="singlePhenotypeViewSpecificCytobandSelectorControls" style="display: none">
+                                        <button id="addGenesOnCytobandToList" type="button" class="btn btn-secondary">Add all genes on Cytoband to Gene List</button>
+                                    </div>
+                                    <div id="volcanoSpecificCytobandSelectorControls" style="display: none">
+                                        <div id="mutexVolcanoSpecificCytobandSelectorControls" style="display: none">
+                                            <button id="markCytobandMutex" type="button" class="btn btn-success">Mark Cytoband Mutex</button>
+                                            <button id="hideCytobandMutex" type="button" class="btn btn-success">Hide Cytoband Mutex</button>
+                                        </div>
+                                        <button id="hideCytobandAllGenes" type="button" class="btn btn-secondary">Hide all genes on Cytoband</button>
+                                    </div>
+                                    <button id="gotoCytoband" type="button" class="btn btn-secondary">Display Cytoband info</button>
+                                    <div id="cytobandSelectorMarkersOuter">
+                                        <div id="cytobandSelectorMarkers">
+                                            <button id="markCytobandAllGenes" type="button" class="btn btn-secondary">Mark All Genes on Cytoband (rclick to remove)</button>
+                                            <button id="clearMarkedGenesOnCytoband" type="button" class="btn btn-secondary">Clear Marked Genes on Cytoband</button>
+                                        </div>
+                                    </div>
+                                    <button id="addCytobandVariantsToMetadata" type="button" class="btn btn-secondary">Add Cytoband Variants to Metadata</button>
+                                </div>
+                                <button id="clearMarkedCytobands" type="button" class="btn btn-secondary" style="display: none;">Clear Marked Cytobands</button>
+                            </div>
+                            <div class="row-fluid panel panel-default" id="geneSelectorGroup">
+                                <div class="row-fluid">
+                                    <div class="input-group">
+                                        <label for="geneSelector" class="col-form-label">
+                                            Find Gene:
+                                        </label>
+                                        <input id="geneSelector"/>
+                                    </div>
+                                </div>
+                                <div id="allGeneSelectorControls">
+                                    <div id="singlePhenotypeViewSpecificGeneSelectorControls" style="display: none">
+                                        <button id="plotSingleGeneAsSinglePhenotype" type="button" class="btn btn-success">Plot Gene</button>
+                                        <button id="addSecondGeneAsSinglePhenotype" type="button" class="btn btn-primary">Add Second Gene to Plot</button>
+                                    </div>
+                                    <div id="variantVizSpecificGeneSelectorControls">
+                                        <button id="markCytobandsCarryingGene" type="button" class="btn btn-secondary">Mark Cytoband(s) overlapping Gene (rclick to remove)</button>
+                                    </div>
+                                    <div id="volcanoSpecificGeneSelectorControls" style="display: none">
+                                        <div id="correlationVolcanoSpecificGeneSelectorControls" style="display: none">
+                                            <button id="startCorrelationVolcanoAnalysisGene" type="button" class="btn btn-success">Start Correlation Analysis</button>
+                                        </div>
+                                        <button id="hideAllGenesOnCytobandsCarryingGene" type="button" class="btn btn-secondary">Hide all genes on Cytoband(s) overlapping Gene</button>
+                                    </div>
+                                    <button id="addGeneExpressionToMetadata" type="button" class="btn btn-secondary">Add Gene Expression to Metadata</button>
+                                    <button id="addGeneVariantsToMetadata" type="button" class="btn btn-secondary">Add Gene Variants to Metadata</button>
+                                    <button id="gotoGeneVariants" type="button" class="btn btn-secondary">Display Gene variant info</button>
+                                    <div id="geneSelectorMarkersOuter">
+                                        <div id="geneSelectorMarkers">
+                                            <button id="markGene" type="button" class="btn btn-secondary">Mark Gene (rclick to remove)</button>
+                                            <button id="markAllGenesOnCytobandsCarryingGene" type="button" class="btn btn-secondary" >Mark all genes on Cytoband(s) overlapping Gene (rclick to remove)</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="geneSelectorControlsForMarkedGenes" style="display: none">
+                                    <button id="clearMarkedGenes" type="button" class="btn btn-secondary">Clear Marked Genes</button>
+                                </div>
+                            </div>
+                            <div class="row-fluid panel panel-default" id="antibodySelectorGroup" style="display: none">
+                                <div class="row-fluid">
+                                    <div class="input-group">
+                                        <label for="antibodySelector" class="col-form-label">
+                                            Find RPPA Antibody:
+                                        </label>
+                                        <input id="antibodySelector"/>
+                                    </div>
+                                </div>
+                                <div id="allAntibodySelectorControls">
+                                    <button id="addAntibodyExpressionToMetadata" type="button" class="btn btn-secondary">Add RPPA Expression to Metadata</button>
+                                    <div id="singlePhenotypeViewSpecificAntibodySelectorControls" style="display: none">
+                                        <button id="plotSingleAntibodyAsSinglePhenotype" type="button" class="btn btn-secondary">Plot Antibody</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group" id="singlePhenotypeExpressionControls" style="display: none">
+                        <div class="row" id="tadOffsetSelectorSinglePhenotypeGroup">
+                            <div class="col" style="display:inline-block">
+                                <label for="svTadOffsetSelectorSinglePhenotypeSelector" class="col-form-label">Max SV TAD-offset: </label>
+                                <select class="form-control" title="svTadOffsetSelectionSinglePhenotype" id="svTadOffsetSelectorSinglePhenotypeSelector">
+                                    <option value="-1">NO</option>
+                                    <option value="0">0</option>
+                                    <option value="1" selected>1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                            <div class="col" style="display:inline-block">
+                                <label for="offIndelTadOffsetSelectorSinglePhenotypeSelector" class="col-form-label">off-Indel TAD-offset: </label>
+                                <select class="form-control" title="offIndelTadOffsetSelectionSinglePhenotype" id="offIndelTadOffsetSelectorSinglePhenotypeSelector">
+                                    <option value="-1" selected>NO</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row-fluid" id="groupSelectorSinglePhenotypeGroup">
+                            <div class="col" style="display:inline-block">
+                                <label for="groupSelectorSinglePhenotypeSelector1" class="col-form-label">Group 1: </label>
+                                <select class="form-control" title="groupSelectionSinglePhenotypeSelector1" id="groupSelectorSinglePhenotypeSelector1">
+                                </select>
+                            </div>
+                            <div class="col" style="display:inline-block">
+                                <label for="groupSelectorSinglePhenotypeSelector2" class="col-form-label">Group 2: </label>
+                                <select class="form-control" title="groupSelectionSinglePhenotypeSelector2" id="groupSelectorSinglePhenotypeSelector2">
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row-fluid" id="singlePhenotypePlotBaseSizeFactorControllerGroup">
+                            <label for="singlePhenotypePlotBaseSizeFactorController" class="col-form-label" id="singlePhenotypePlotBaseSizeFactorControllerLabel">DefaultSize x 1</label>
+                            <input type="number" id="singlePhenotypePlotBaseSizeFactorController" name="singlePhenotypePlotBaseSizeFactorController" data-provide="slider" data-slider-min="0" data-slider-max="400" data-slider-step="1" data-slider-value="100" data-slider-tooltip="hide" data-slider-orientation="horizontal">
+                        </div>
+                    </div>
+                    <div class="row-fluid" id="survivalControls" style="display: none">
+                        <div class="row-fluid" id="survivalSelectionCheckboxes">
+
+                        </div>
+                        <button id="survivalSelectionsSubmit" type="button" class="btn btn-success">Submit Groups</button>
+                    </div>
+                    <div class="input-group" id="flexiblePlotControls" style="display: none">
+                        <div class="input-group" id="flexiblePlotGridCreatorControls">
+                            <p>
+                                <a class="btn btn-primary" data-toggle="collapse" href="#gridCreatorCollapse" aria-expanded="false" aria-controls="GridCreatorCollapse" id="GridCreatorCollapseControl">
+                                    Create New Grid
+                                </a>
+                            </p>
+                            <div class="collapse" id="gridCreatorCollapse">
+                                <select class="form-control" title="subcohortSelection" id="subcohortSelectorFlexiblePlotGridDefault">
+                                </select>
+                                <div class="row-fluid" id="numGridCellsXControllerGroup">
+                                    <label for="numGridCellsXController" class="col-form-label" id="numGridCellsXControllerLabel">Horizontal Cells: 1</label>
+                                    <input type="number" id="numGridCellsXController" name="numGridCellsX" data-provide="slider" data-slider-min="1" data-slider-max="10" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide" data-slider-orientation="horizontal">
+                                </div>
+                                <div class="row-fluid" id="numGridCellsYControllerGroup">
+                                    <label for="numGridCellsYController" class="col-form-label" id="numGridCellsYControllerLabel">Vertical Cells: 1</label>
+                                    <input type="number" id="numGridCellsYController" name="numGridCellsY" data-provide="slider" data-slider-min="1" data-slider-max="10" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide" data-slider-orientation="horizontal">
+                                </div>
+                                <div class="row-fluid" id="flexibleColourSelectorGroupGridCommon">
+                                    <label for="flexibleColourSelectorGridCommon">Colour (obligatory for Colour Legend)</label>
+                                    <select class="form-control" title="Colour" id="flexibleColourSelectorGridCommon">
+                                    </select>
+                                </div>
+                                <div class="row-fluid" id="flexibleSymbolSelectorGroupGridCommon">
+                                    <label for="flexibleSymbolSelectorGridCommon">Symbol (obligatory for Symbol Legend)</label>
+                                    <select class="form-control" title="Symbol" id="flexibleSymbolSelectorGridCommon">
+                                    </select>
+                                </div>
+                                <div class="row-fluid" id="flexibleRadiusSelectorGroupGridCommon">
+                                    <label for="flexibleRadiusSelectorGridCommon">Radius (obligatory for Radius Legend)</label>
+                                    <select class="form-control" title="Radius" id="flexibleRadiusSelectorGridCommon">
+                                    </select>
+                                </div>
+                                <div class="row-fluid">
+                                    <button id="gridCreationSubmit" type="button" class="btn btn-success">Create Grid</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="flexiblePlotPostGridControls">
+                            <div class="input-group" id="flexiblePlotManifoldControls" style="display: none">
+                                <p>
+                                    <a class="btn btn-primary" data-toggle="collapse" href="#dimensionalityReductionCollapse" aria-expanded="false" aria-controls="dimensionalityReductionCollapse" id="dimensionalityReductionCollapseControl">
+                                        Dimensionality Reduction
+                                    </a>
+                                </p>
+                                <div class="collapse panel panel-default panel-heading" id="dimensionalityReductionCollapse">
+                                    <div class="row-fluid" id="flexiblePlotIndepentSubcohortManifoldCheck">
+                                        <label class="custom-control custom-checkbox">
+                                            <input id="independentSubcohortManifold" type="checkbox" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">Non-Default Subcohort</span>
+                                        </label>
+                                    </div>
+                                    <div class="row-fluid input-group" id="flexibleSubcohortSelectorManifoldGroup">
+                                        <label for="flexibleSubcohortSelectorManifold">Subcohort</label><select class="form-control" title="Subcohort" id="flexibleSubcohortSelectorManifold"></select>
+                                    </div><br>
+                                    <div id="flexibleGridSettingsManifoldGroup">
+                                        <div class="row-fluid">
+                                            <button id="flexibleGridGoToNextAvailableManifold" type="button" class="btn btn-secondary">Go to Next Available Cell</button>
+                                            <button id="flexibleGridGoToNextManifold" type="button" class="btn btn-secondary">Go to Next Cell</button>
+                                        </div>
+                                        <div class="row-fluid" id="flexibleGridStartXManifoldSelectorGroup"><select class="form-control" title="flexibleGridStartXManifoldSelection" id="flexibleGridStartXManifoldSelector"></select></div>
+                                        <div class="row-fluid" id="flexibleGridEndXManifoldSelectorGroup"><select class="form-control" title="flexibleGridEndXManifoldSelection" id="flexibleGridEndXManifoldSelector"></select></div>
+                                        <div class="row-fluid" id="flexibleGridStartYManifoldSelectorGroup"><select class="form-control" title="flexibleGridStartYManifoldSelection" id="flexibleGridStartYManifoldSelector"></select></div>
+                                        <div class="row-fluid" id="flexibleGridEndYManifoldSelectorGroup"><select class="form-control" title="flexibleGridEndYManifoldSelection" id="flexibleGridEndYManifoldSelector"></select></div>
+                                    </div>
+                                    <div class="row-fluid" id="flexiblePlotManifoldProgressBarGroup" style="display:none">
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" id="flexiblePlotManifoldProgressBar"
+                                                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="manifoldPreControls">
+                                        <div class="row-fluid">
+                                            <select class="form-control" title="ManifoldPhenotype" id="ManifoldPhenotypeSelector"></select>
+                                        </div>
+                                        <div class="row-fluid" id="ManifoldTopNGroup" style="display:none">
+                                            <div class="input-group">
+                                                <label for="ManifoldTopN" class="col-form-label" id="ManifoldTopNLabel">Top N: 500</label>
+                                                <input type="number" id="ManifoldTopN" name="ManifoldTopN" data-provide="slider" data-slider-min="1" data-slider-max="200" data-slider-step="1" data-slider-value="10" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                                        </div>
+                                        <div class="row-fluid" id="flexibleNumericColumnsForCustomManifoldGroup" style="display: none">
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" id="flexibleCustomManifoldName" placeholder="Name Selection (enter to confirm)">
+                                            </div>
+                                            <p>
+                                                <button class="btn btn-secondary" data-toggle="collapse" href="#flexibleNumericColumnsForCustomManifoldCollapse" aria-expanded="false" aria-controls="flexibleNumericColumnsForCustomManifoldCollapse">
+                                                    Choose Numeric Metadata Columns (at least 3) for Dimensionality Reduction
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="flexibleNumericColumnsForCustomManifoldCollapse">
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div id="manifoldMainControls" style="display: none;">
+                                        <p>
+                                            <button class="btn btn-secondary" data-toggle="collapse" href="#PCACollapse" aria-expanded="false" aria-controls="PCACollapse" id="PCACollapseControl">
+                                                PCA
+                                            </button>
+                                        </p>
+                                        <div class="collapse" id="PCACollapse">
+                                            <a href="https://github.com/mljs/pca" target="_blank">Github</a>
+                                            <div class="row-fluid">
+                                                <button id="PCASubmit" type="button" class="btn btn-success">Run PCA</button>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <p>
+                                            <button class="btn btn-secondary" data-toggle="collapse" href="#tSNECollapse" aria-expanded="false" aria-controls="tSNECollapse" id="tSNECollapseControl">
+                                                tSNE
+                                            </button>
+                                        </p>
+                                        <div class="collapse" id="tSNECollapse">
+                                            <a href="https://github.com/karpathy/tsnejs" target="_blank">(Heavily modified from) Github</a>
+                                            <div class="row-fluid">
+                                                <div class="input-group"><label for="tSNEPerplexity" class="col-form-label" id="tSNEPerplexityLabel">Perplexity: 5</label><input type="number" id="tSNEPerplexity" name="tSNEPerplexity" data-provide="slider" data-slider-min="1" data-slider-max="200" data-slider-step="1" data-slider-value="5" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="input-group"><label for="tSNELearningRate" class="col-form-label" id="tSNELearningRateLabel">Learning Rate: 200</label> <input type="number" id="tSNELearningRate" name="tSNELearningRate" data-provide="slider" data-slider-min="0" data-slider-max="400" data-slider-step="0.5" data-slider-value="200" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="input-group"><label for="tSNEIterations" class="col-form-label" id="tSNEIterationsLabel">Iterations: 1000</label> <input type="number" id="tSNEIterations" name="tSNEIterations" data-provide="slider" data-slider-min="3" data-slider-max="10000" data-slider-step="10" data-slider-value="1000" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="input-group"><label for="tSNEEarlyExaggeration" class="col-form-label" id="tSNEEarlyExaggerationLabel">EarlyExaggeration: 12</label> <input type="number" id="tSNEEarlyExaggeration" name="tSNEEarlyExaggeration" data-provide="slider" data-slider-min="1" data-slider-max="20" data-slider-step="1" data-slider-value="12" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="input-group"><label for="tSNEIterationsEarlyExaggeration" class="col-form-label" id="tSNEIterationsEarlyExaggerationLabel">IterationsEarlyExaggeration: 250</label> <input type="number" id="tSNEIterationsEarlyExaggeration" name="tSNEIterationsEarlyExaggeration" data-provide="slider" data-slider-min="10" data-slider-max="1000" data-slider-step="10" data-slider-value="250" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="input-group"><label for="tSNELateExaggeration" class="col-form-label" id="tSNELateExaggerationLabel">LateExaggeration: 1.5</label> <input type="number" id="tSNELateExaggeration" name="tSNELateExaggeration" data-provide="slider" data-slider-min="1" data-slider-max="4" data-slider-step="0.1" data-slider-value="1.5" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="input-group"><label for="tSNEIterationsLateExaggeration" class="col-form-label" id="tSNEIterationsLateExaggerationLabel">IterationsLateExaggeration: 100</label> <input type="number" id="tSNEIterationsLateExaggeration" name="tSNEIterationsLateExaggeration" data-provide="slider" data-slider-min="10" data-slider-max="1000" data-slider-step="10" data-slider-value="100" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="input-group"><label for="tSNEAlpha" class="col-form-label" id="tSNEAlphaLabel">Alpha: 1</label> <input type="number" id="tSNEAlpha" name="tSNEAlpha" data-provide="slider" data-slider-min="0.1" data-slider-max="4" data-slider-step="0.1" data-slider-value="1" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <label class="custom-control custom-checkbox active" id="pcaPreTsneGroup">
+                                                    <input id="pcaPreTsne" type="checkbox" class="custom-control-input">
+                                                    <span class="custom-control-indicator"></span>
+                                                    <span class="custom-control-description">PCA First?</span>
+                                                </label>
+                                                <div class="row-fluid" id="nDimPCAPreTsneGroup" style="display:none;">
+                                                    <div class="input-group">
+                                                        <label for="nDimPCAPreTsne" class="col-form-label" id="nDimPCAPreTsneLabel">Dimensions: 50</label>
+                                                        <input type="number"
+                                                               id="nDimPCAPreTsne"
+                                                               name="nDimPCAPreTsne"
+                                                               data-provide="slider"
+                                                               data-slider-min="20"
+                                                               data-slider-max="100"
+                                                               data-slider-step="1"
+                                                               data-slider-value="50"
+                                                               data-slider-tooltip="hide"
+                                                               data-slider-orientation="horizontal"></div><br/>
+                                                </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <button id="tSNESubmit" type="button" class="btn btn-success">Run tSNE</button>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <p>
+                                            <button class="btn btn-secondary" data-toggle="collapse" href="#UMAPCollapse" aria-expanded="false" aria-controls="UMAPCollapse" id="UMAPCollapseControl">
+                                                UMAP
+                                            </button>
+                                        </p>
+                                        <div class="collapse" id="UMAPCollapse">
+                                            <a href="https://github.com/lmcinnes/umap" target="_blank">(Rewritten from) Github</a>
+                                            <div class="row-fluid">
+                                                <div class="input-group">
+                                                    <label for="UMAP_n_neighbors" class="col-form-label" id="UMAP_n_neighborsLabel">n_neighbors: 3</label>
+                                                    <input type="number"
+                                                           id="UMAP_n_neighbors"
+                                                           name="UMAP_n_neighbors"
+                                                           data-provide="slider"
+                                                           data-slider-min="3"
+                                                           data-slider-max="50"
+                                                           data-slider-step="1"
+                                                           data-slider-value="3"
+                                                           data-slider-tooltip="hide"
+                                                           data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <select class="form-control" title="UMAPDistanceSelection" id="UMAPDistanceSelector">
+                                                <option value="-1">Select Distance Measure</option>
+                                            </select>
+                                            <div class="row-fluid">
+                                                <div class="input-group">
+                                                    <label for="UMAP_n_epochs" class="col-form-label" id="UMAP_n_epochsLabel">n_epochs: 500</label>
+                                                    <input type="number"
+                                                           id="UMAP_n_epochs"
+                                                           name="UMAP_n_epochs"
+                                                           data-provide="slider"
+                                                           data-slider-min="100"
+                                                           data-slider-max="10000"
+                                                           data-slider-step="50"
+                                                           data-slider-value="500"
+                                                           data-slider-tooltip="hide"
+                                                           data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="input-group">
+                                                    <label for="UMAP_learningRate" class="col-form-label" id="UMAP_learningRateLabel">learningRate: 1.0</label>
+                                                    <input type="number"
+                                                           id="UMAP_learningRate"
+                                                           name="UMAP_learningRate"
+                                                           data-provide="slider"
+                                                           data-slider-min="0.1"
+                                                           data-slider-max="20"
+                                                           data-slider-step="0.1"
+                                                           data-slider-value="1"
+                                                           data-slider-tooltip="hide"
+                                                           data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <select class="form-control" title="UMAPInitSelection" id="UMAPInitSelector">
+                                                <option value="spectral">Spectral Embedding</option>
+                                                <option value="random">Random Embedding</option>
+                                            </select>
+                                            <div class="row-fluid">
+                                                <div class="input-group">
+                                                    <label for="UMAP_minDist" class="col-form-label" id="UMAP_minDistLabel">minDist: 0.1</label>
+                                                    <input type="number"
+                                                           id="UMAP_minDist"
+                                                           name="UMAP_minDist"
+                                                           data-provide="slider"
+                                                           data-slider-min="0.05"
+                                                           data-slider-max="40"
+                                                           data-slider-step="0.05"
+                                                           data-slider-value="0.1"
+                                                           data-slider-tooltip="hide"
+                                                           data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="input-group">
+                                                    <label for="UMAP_spread" class="col-form-label" id="UMAP_spreadLabel">spread (must be >= minDist): 1.0</label>
+                                                    <input type="number"
+                                                           id="UMAP_spread"
+                                                           name="UMAP_spread"
+                                                           data-provide="slider"
+                                                           data-slider-min="0.05"
+                                                           data-slider-max="40"
+                                                           data-slider-step="0.05"
+                                                           data-slider-value="1.0"
+                                                           data-slider-tooltip="hide"
+                                                           data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="input-group">
+                                                    <label for="UMAP_set_op_mix_ratio" class="col-form-label" id="UMAP_set_op_mix_ratioLabel">set_op_mix_ratio : 0.5</label>
+                                                    <input type="number"
+                                                           id="UMAP_set_op_mix_ratio"
+                                                           name="UMAP_set_op_mix_ratio"
+                                                           data-provide="slider"
+                                                           data-slider-min="0.01"
+                                                           data-slider-max="1.0"
+                                                           data-slider-step="0.01"
+                                                           data-slider-value="0.5"
+                                                           data-slider-tooltip="hide"
+                                                           data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="input-group">
+                                                    <label for="UMAP_local_connectivity" class="col-form-label" id="UMAP_local_connectivityLabel">local_connectivity : 1.0</label>
+                                                    <input type="number"
+                                                           id="UMAP_local_connectivity"
+                                                           name="UMAP_local_connectivity"
+                                                           data-provide="slider"
+                                                           data-slider-min="0.0"
+                                                           data-slider-max="4.0"
+                                                           data-slider-step="0.05"
+                                                           data-slider-value="1.0"
+                                                           data-slider-tooltip="hide"
+                                                           data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="input-group">
+                                                    <label for="UMAP_repulsion_strength" class="col-form-label" id="UMAP_repulsion_strengthLabel">repulsion_strength : 1.0</label>
+                                                    <input type="number"
+                                                           id="UMAP_repulsion_strength"
+                                                           name="UMAP_repulsion_strength"
+                                                           data-provide="slider"
+                                                           data-slider-min="0.0"
+                                                           data-slider-max="5.0"
+                                                           data-slider-step="0.05"
+                                                           data-slider-value="1.0"
+                                                           data-slider-tooltip="hide"
+                                                           data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="input-group">
+                                                    <label for="UMAP_negative_sample_rate" class="col-form-label" id="UMAP_negative_sample_rateLabel">negative_sample_rate : 5</label>
+                                                    <input type="number"
+                                                           id="UMAP_negative_sample_rate"
+                                                           name="UMAP_negative_sample_rate"
+                                                           data-provide="slider"
+                                                           data-slider-min="0.5"
+                                                           data-slider-max="50"
+                                                           data-slider-step="0.5"
+                                                           data-slider-value="5"
+                                                           data-slider-tooltip="hide"
+                                                           data-slider-orientation="horizontal"></div><br/>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <label class="custom-control custom-checkbox active" id="pcaPreUmapGroup">
+                                                    <input id="pcaPreUmap" type="checkbox" class="custom-control-input">
+                                                    <span class="custom-control-indicator"></span>
+                                                    <span class="custom-control-description">PCA First?</span>
+                                                </label>
+                                                <div class="row-fluid" id="nDimPCAPreUmapGroup" style="display:none;">
+                                                    <div class="input-group">
+                                                        <label for="nDimPCAPreUmap" class="col-form-label" id="nDimPCAPreUmapLabel">Dimensions: 50</label>
+                                                        <input type="number"
+                                                               id="nDimPCAPreUmap"
+                                                               name="nDimPCAPreUmap"
+                                                               data-provide="slider"
+                                                               data-slider-min="20"
+                                                               data-slider-max="100"
+                                                               data-slider-step="1"
+                                                               data-slider-value="50"
+                                                               data-slider-tooltip="hide"
+                                                               data-slider-orientation="horizontal"></div><br/>
+                                                </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <button id="UMAPSubmit" type="button" class="btn btn-success" style="display: none;">Run UMAP</button>
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                    <p>
+                                        <button class="btn btn-secondary" data-toggle="collapse" href="#flexiblePlotManifoldChoicesCollapse" aria-expanded="false" aria-controls="flexiblePlotManifoldChoicesCollapse" id="flexiblePlotManifoldChoicesCollapseControl" style="display: none">
+                                            Data used for Dimensionality Reduction
+                                        </button>
+                                    </p>
+                                    <div class="collapse" id="flexiblePlotManifoldChoicesCollapse">
+                                        <div id="flexiblePlotManifoldChoices">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group" id="flexiblePlotClusteringControls" style="display: none">
+                                <p>
+                                    <a class="btn btn-primary" data-toggle="collapse" href="#flexiblePlotClusteringMainCollapse" aria-expanded="false" aria-controls="flexiblePlotClusteringMainCollapse" id="flexiblePlotClusteringMainCollapseControl">
+                                        Clustering
+                                    </a>
+                                </p>
+                                <div class="collapse" id="flexiblePlotClusteringMainCollapse">
+                                    <div class="row-fluid" id="flexiblePlotClusteringTargetPanel">
+                                        <select class="form-control" title="Subplot" id="flexiblePlotClusteringTargetPanelSelector">
+                                        </select>
+                                    </div>
+                                    <p>
+                                        <button class="btn btn-secondary" data-toggle="collapse" href="#flexiblePlotClusteringCollapse" aria-expanded="false" aria-controls="flexiblePlotClusteringCollapse" id="flexiblePlotClusteringCollapseControl">
+                                            Clustering Methods
+                                        </button>
+                                    </p>
+                                    <div class="collapse" id="flexiblePlotClusteringCollapse">
+                                        <div class="row-fluid">
+                                            <select class="form-control" title="FlexibleClusteringDistanceSelection" id="FlexibleClusteringDistanceSelector">
+                                                <option value="-1">Select Distance Measure</option>
+                                            </select>
+                                        </div>
+                                        <div class="row-fluid">
+                                            <label class="custom-control custom-checkbox active">
+                                                <input id="shadeClusters" type="checkbox" class="custom-control-input" checked>
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description">Shade Clusters</span>
+                                            </label>
+                                            <br>
+                                        </div><br>
+                                        <div class="row-fluid">
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" id="flexibleClusteringPrefixName" placeholder="Unique Prefix (Enter to confirm)">
+                                            </div><br>
+                                        </div><br>
+                                        <div class="row-fluid">
+                                            <p>
+                                                <button type="button" class="btn btn-secondary" data-toggle="collapse" href="#KmeansCollapse" aria-expanded="false" aria-controls="KmeansCollapse" id="KmeansCollapseControl">
+                                                    K-Means
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="KmeansCollapse">
+                                                <a href="https://github.com/Philmod/node-kmeans" target="_blank">Github</a>
+                                                <div class="row-fluid">
+                                                    <div class="input-group">
+                                                        <label for="kmeansK" class="col-form-label" id="kmeansKLabel">K: 3</label>
+                                                        <input type="number"
+                                                               id="kmeansK"
+                                                               name="kmeansK"
+                                                               data-provide="slider"
+                                                               data-slider-min="2"
+                                                               data-slider-max="40"
+                                                               data-slider-step="1"
+                                                               data-slider-value="3"
+                                                               data-slider-tooltip="hide"
+                                                               data-slider-orientation="horizontal"></div><br/>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <button id="KmeansSubmit" type="button" class="btn btn-success" style="display: none;">Run K-Means</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row-fluid">
+                                            <p>
+                                                <button type="button" class="btn btn-secondary" data-toggle="collapse" href="#KmedoidsCollapse" aria-expanded="false" aria-controls="KmedoidsCollapse" id="KmedoidsCollapseControl">
+                                                    K-Medoids
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="KmedoidsCollapse">
+                                                <a href="https://github.com/stewart-r/k-medoids" target="_blank">Github</a>
+                                                <div class="row-fluid">
+                                                    <div class="input-group">
+                                                        <label for="kmedoidsK" class="col-form-label" id="kmedoidsKLabel">K: 3</label>
+                                                        <input type="number"
+                                                               id="kmedoidsK"
+                                                               name="kmedoidsK"
+                                                               data-provide="slider"
+                                                               data-slider-min="2"
+                                                               data-slider-max="40"
+                                                               data-slider-step="1"
+                                                               data-slider-value="3"
+                                                               data-slider-tooltip="hide"
+                                                               data-slider-orientation="horizontal"></div><br/>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <button id="KmedoidsSubmit" type="button" class="btn btn-success" style="display: none;">Run K-Medoids</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row-fluid">
+                                            <p>
+                                                <button type="button" class="btn btn-secondary" data-toggle="collapse" href="#DBSCANCollapse" aria-expanded="false" aria-controls="DBSCANCollapse" id="DBSCANCollapseControl">
+                                                    Fuzzy DBSCAN
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="DBSCANCollapse">
+                                                <a href="https://github.com/schulzch/fuzzy-dbscan-js" target="_blank">Github</a>
+                                                <div class="row-fluid">
+                                                    <div class="input-group">
+                                                        <label for="epsMinDBSCAN" class="col-form-label" id="epsMinDBSCANLabel">epsMin: 0.1</label>
+                                                        <input type="number"
+                                                               id="epsMinDBSCAN"
+                                                               name="epsMinDBSCAN"
+                                                               data-provide="slider"
+                                                               data-slider-min="0.1"
+                                                               data-slider-max="40"
+                                                               data-slider-step="0.1"
+                                                               data-slider-value="0.1"
+                                                               data-slider-tooltip="hide"
+                                                               data-slider-orientation="horizontal"></div><br/>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="input-group">
+                                                        <label for="epsMaxDBSCAN" class="col-form-label" id="epsMaxDBSCANLabel">epsMax: 1.0</label>
+                                                        <input type="number"
+                                                               id="epsMaxDBSCAN"
+                                                               name="epsMaxDBSCAN"
+                                                               data-provide="slider"
+                                                               data-slider-min="0.1"
+                                                               data-slider-max="40"
+                                                               data-slider-step="0.1"
+                                                               data-slider-value="1.0"
+                                                               data-slider-tooltip="hide"
+                                                               data-slider-orientation="horizontal"></div><br/>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="input-group">
+                                                        <label for="mPtsMinDBSCAN" class="col-form-label" id="mPtsMinDBSCANLabel">mPtsMin: 1</label>
+                                                        <input type="number"
+                                                               id="mPtsMinDBSCAN"
+                                                               name="mPtsMinDBSCAN"
+                                                               data-provide="slider"
+                                                               data-slider-min="1"
+                                                               data-slider-max="1000"
+                                                               data-slider-step="1"
+                                                               data-slider-value="1"
+                                                               data-slider-tooltip="hide"
+                                                               data-slider-orientation="horizontal"></div><br/>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="input-group">
+                                                        <label for="mPtsMaxDBSCAN" class="col-form-label" id="mPtsMaxDBSCANLabel">mPtsMax: 10</label>
+                                                        <input type="number"
+                                                               id="mPtsMaxDBSCAN"
+                                                               name="mPtsMaxDBSCAN"
+                                                               data-provide="slider"
+                                                               data-slider-min="1"
+                                                               data-slider-max="1000"
+                                                               data-slider-step="1"
+                                                               data-slider-value="10"
+                                                               data-slider-tooltip="hide"
+                                                               data-slider-orientation="horizontal"></div><br/>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <button id="DBSCANSubmit" type="button" class="btn btn-success" style="display: none;">Run Fuzzy DBSCAN</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row-fluid">
+                                            <p>
+                                                <button type="button" class="btn btn-secondary" data-toggle="collapse" href="#OPTICSCollapse" aria-expanded="false" aria-controls="OPTICSCollapse" id="OPTICSCollapseControl">
+                                                    OPTICS
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="OPTICSCollapse">
+                                                <a href="https://github.com/uhho/density-clustering" target="_blank">Github</a>
+                                                <div class="row-fluid">
+                                                    <div class="input-group">
+                                                        <label for="mPtsMinOPTICS" class="col-form-label" id="mPtsMinOPTICSLabel">mPtsMin: 2</label>
+                                                        <input type="number"
+                                                               id="mPtsMinOPTICS"
+                                                               name="mPtsMinOPTICS"
+                                                               data-provide="slider"
+                                                               data-slider-min="1"
+                                                               data-slider-max="1000"
+                                                               data-slider-step="1"
+                                                               data-slider-value="2"
+                                                               data-slider-tooltip="hide"
+                                                               data-slider-orientation="horizontal"></div><br/>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="input-group">
+                                                        <label for="neighbourhoodRadiusOPTICS" class="col-form-label" id="neighbourhoodRadiusOPTICSLabel">neighbourhoodRadius: 1</label>
+                                                        <input type="number"
+                                                               id="neighbourhoodRadiusOPTICS"
+                                                               name="neighbourhoodRadiusOPTICS"
+                                                               data-provide="slider"
+                                                               data-slider-min="0.1"
+                                                               data-slider-max="40"
+                                                               data-slider-step="0.1"
+                                                               data-slider-value="1.0"
+                                                               data-slider-tooltip="hide"
+                                                               data-slider-orientation="horizontal"></div><br/>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <button id="OPTICSSubmit" type="button" class="btn btn-success" style="display: none;">Run OPTICS</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row-fluid">
+                                            <!--<p>-->
+                                            <!--<button type="button" class="btn btn-secondary" data-toggle="collapse" href="#HDBSCANCollapse" aria-expanded="false" aria-controls="HDBSCANCollapse" id="HDBSCANCollapseControl">-->
+                                            <!--HDBSCAN-->
+                                            <!--</button>-->
+                                            <!--</p>-->
+                                            <!--<div class="collapse" id="HDBSCANCollapse">-->
+                                            <!--<div class="row-fluid">-->
+                                            <!--<button id="HDBSCANSubmit" type="button" class="btn btn-success" style="display: none;">Run HDBSCAN</button>-->
+                                            <!--</div>-->
+                                            <!--</div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid" id="flexibleSubplotDefinitionsGroup">
+                                <div id="flexibleGridSettingsGroup">
+                                    <div class="row-fluid">
+                                        <button id="flexibleGridGoToNextAvailable" type="button" class="btn btn-secondary">Go to Next Available Cell</button>
+                                        <button id="flexibleGridGoToNext" type="button" class="btn btn-secondary">Go to Next Cell</button>
+                                    </div>
+                                    <div class="row-fluid" id="flexibleGridStartXSelectorGroup"><select class="form-control" title="flexibleGridStartXSelection" id="flexibleGridStartXSelector"></select></div>
+                                    <div class="row-fluid" id="flexibleGridEndXSelectorGroup"><select class="form-control" title="flexibleGridEndXSelection" id="flexibleGridEndXSelector"></select></div>
+                                    <div class="row-fluid" id="flexibleGridStartYSelectorGroup"><select class="form-control" title="flexibleGridStartYSelection" id="flexibleGridStartYSelector"></select></div>
+                                    <div class="row-fluid" id="flexibleGridEndYSelectorGroup"><select class="form-control" title="flexibleGridEndYSelection" id="flexibleGridEndYSelector"></select></div>
+                                </div>
+                                <div class="row-fluid" id="flexiblePlotIndepentSubcohortCheck">
+                                    <label class="custom-control custom-checkbox">
+                                        <input id="independentSubcohort" type="checkbox" class="custom-control-input">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Non-Default Subcohort</span>
+                                    </label>
+                                </div>
+                                <div class="row-fluid input-group" id="flexibleSubcohortSelectorGroup">
+                                    <label for="flexibleSubcohortSelector">Subcohort</label><select class="form-control" title="Subcohort" id="flexibleSubcohortSelector"></select>
+                                </div><br>
+                                <div class="row-fluid" id="flexibleXaxisSelectorGroup"><label for="flexibleXaxisSelector">X</label><select class="form-control" title="X-Axis" id="flexibleXaxisSelector"></select></div><br>
+                                <div class="row-fluid" id="flexibleNumericColumnsForBarplotsGroup" style="display: none">
+                                    <p id="BarplotAxisLabel"></p>
+                                    <p>
+                                        <a class="btn btn-primary" data-toggle="collapse" href="#flexibleNumericColumnsForBarplotsCollapse" aria-expanded="false" aria-controls="flexibleNumericColumnsForBarplotsCollapse">
+                                            Choose Numeric Metadata Column(s) for (stacked) Barplots
+                                        </a>
+                                    </p>
+                                    <div class="collapse" id="flexibleNumericColumnsForBarplotsCollapse">
+                                    </div>
+                                    <br>
+                                </div>
+                                <div class="row-fluid" id="flexibleYaxisSelectorGroup"><label for="flexibleYaxisSelector">Y</label><select class="form-control" title="Y-Axis" id="flexibleYaxisSelector"></select></div><br>
+                                <div class="row-fluid"><b><p id="flexiblePlotTypeToExpect"></p></b></div><br>
+                                <div class="row-fluid" id="flexiblePlotIndepentColourCheck">
+                                    <label class="custom-control custom-checkbox">
+                                        <input id="independentColour" type="checkbox" class="custom-control-input">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Independent Colour</span>
+                                    </label>
+                                </div>
+                                <div class="row-fluid input-group" id="flexibleColourSelectorGroup">
+                                    <label for="flexibleColourSelector">Colour</label><select class="form-control" title="Colour" id="flexibleColourSelector"></select>
+                                </div><br>
+                                <div class="row-fluid" id="flexiblePlotIndepentSymbolCheck">
+                                    <label class="custom-control custom-checkbox">
+                                        <input id="independentSymbol" type="checkbox" class="custom-control-input">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Independent Symbol</span>
+                                    </label>
+                                </div>
+                                <div class="row-fluid input-group" id="flexibleSymbolSelectorGroup">
+                                    <label for="flexibleSymbolSelector">Symbol</label><select class="form-control" title="Symbol" id="flexibleSymbolSelector"></select>
+                                </div><br>
+                                <div class="row-fluid" id="flexiblePlotIndepentRadiusCheck">
+                                    <label class="custom-control custom-checkbox">
+                                        <input id="independentRadius" type="checkbox" class="custom-control-input">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Independent Radius</span>
+                                    </label>
+                                </div>
+                                <div class="row-fluid input-group" id="flexibleRadiusSelectorGroup">
+                                    <label for="flexibleRadiusSelector">Radius</label><select class="form-control" title="Radius" id="flexibleRadiusSelector"></select>
+                                </div><br>
+                                <div class="row-fluid"><button id="submitFlexiblePlotAnalysis" type="button" class="btn btn-success" style="display: none">Submit Choices</button></div><br>
+                            </div>
+                            <div class="row-fluid" id="flexiblePlotHoverLabelGroup">
+                                <p>
+                                    <a class="btn btn-primary" data-toggle="collapse" href="#flexibleHoverDescriptionColumnsCollapse" aria-expanded="false" aria-controls="flexibleHoverDescriptionColumnsCollapse">
+                                        Include metadata columns in hover-description
+                                    </a>
+                                </p>
+                                <div class="collapse" id="flexibleHoverDescriptionColumnsCollapse">
+                                </div>
+                                <p>
+                                    <a class="btn btn-primary" data-toggle="collapse" href="#flexibleLabelDescriptionColumnsCollapse" aria-expanded="false" aria-controls="flexibleLabelDescriptionColumnsCollapse">
+                                        Include metadata columns in label-description
+                                    </a>
+                                </p>
+                                <div class="collapse" id="flexibleLabelDescriptionColumnsCollapse">
+                                </div>
+                            </div>
+                            <div class="row-fluid" id="flexiblePlotBaseSizeFactorControllerGroup" style="display:none">
+                                <label for="flexiblePlotBaseSizeFactorController" class="col-form-label" id="flexiblePlotBaseSizeFactorControllerLabel">DefaultSize x 1</label>
+                                <input type="number" id="flexiblePlotBaseSizeFactorController" name="flexiblePlotBaseSizeFactorController" data-provide="slider" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="3" data-slider-tooltip="hide" data-slider-orientation="horizontal">
+                            </div>
+                            <div class="row-fluid" id="subcohortSelectionFromFlexiblePlotGroup" style="display: none">
+                                <p>Subcohort Definition</p>
+                                <div class="row-fluid" id="subcohortSelectionFromFlexiblePlotDescription"></div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="flexibleSubcohortSelectionName" placeholder="Name Selection (enter to confirm)">
+                                </div>
+                                <div class="col-md-6">
+                                    <button id="createSubcohortFromMarkedDonors" type="button" class="btn btn-secondary btn" style="display: none;">Subcohort from Marked</button>
+                                </div>
+                            </div><br>
+                            <div class="row-fluid panel panel-default" id="flexibleDonorMarkerGroup" style="display: none;">
+                                <p>Single Donor Marking</p>
+                                <select class="form-control" title="flexibleDonorMarking" id="flexibleDonorMarkerSelector">
+                                </select>
+                                <button id="submitDonorForMarking" type="button" class="btn btn-primary btn" style="display: none">Mark Donor (rclick to remove)</button>
+                                <div class="row-fluid"><button id="clearMarkedDonorsFromFlexiblePlot" type="button" class="btn btn-secondary btn" style="display: none">Clear Marked Donors</button></div>
+                            </div><br>
+                            <div class="row-fluid panel panel-default" id="flexibleSubcohortMarkerGroup" style="display: none;">
+                                <p>Single Subcohort Marking & Shading</p>
+                                <select class="form-control" title="flexibleSubcohortMarking" id="flexibleSubcohortMarkerSelector"></select><br>
+                                <button id="submitSubcohortForMarking" type="button" class="btn btn-primary btn" style="display: none">Mark Subcohort</button><br>
+                                <button id="submitSubcohortForShading" type="button" class="btn btn-primary btn" style="display: none">Shade Subcohort (rclick to remove)</button><br>
+                                <div class="row-fluid" id="subcohortShadingConcavityGroup" style="display: none">
+                                    <label for="subcohortShadingConcavityController" class="col-form-label" id="subcohortShadingConcavityControllerLabel">Concavity = 5</label>
+                                    <input type="number" id="subcohortShadingConcavityController" name="subcohortShadingConcavityController" data-provide="slider" data-slider-min="1" data-slider-max="30" data-slider-step="1" data-slider-value="5" data-slider-tooltip="hide" data-slider-orientation="horizontal">
+                                </div>
+                                <div class="row-fluid"><button id="clearShadedSubcohorts" type="button" class="btn btn-secondary btn" style="display: none">Clear Shaded Subcohorts</button></div>
+                            </div>
+                            <div id="flexiblePlotHiddenControls">
+                                <button id="flexiblePlotAddNewestMetadataColumn" type="button" class="btn" style="display: none"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group" id="heatmapControls" style="display: none">
+                        <div class="row-fluid">
+                            <div class="input-group"><label for="heatmapTopN" class="col-form-label" id="heatmapTopNLabel">Top N: 500</label> <input type="number" id="heatmapTopN" name="heatmapTopN" data-provide="slider" data-slider-min="1" data-slider-max="200" data-slider-step="1" data-slider-value="10" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="input-group"><label for="heatmapHeightCoeff" class="col-form-label" id="heatmapHeightCoeffLabel">Height = Width * 1</label> <input type="number" id="heatmapHeightCoeff" name="heatmapHeightCoeff" data-provide="slider" data-slider-min="0" data-slider-max="17" data-slider-step="0.5" data-slider-value="3" data-slider-tooltip="hide" data-slider-orientation="horizontal"></div><br/>
+                        </div>
+                        <select class="form-control" title="heatmapPhenotypeSelection" id="heatmapPhenotypeSelector"></select>
+                        <select class="form-control" title="heatmapDistanceSelection" id="heatmapDistanceSelector">
+                            <option value="-1">Select Distance Measure</option>
+                        </select>
+                        <select class="form-control" title="heatmapLinkageSelection" id="heatmapLinkageSelector">
+                            <option value="-1">Select Linkage Criterion</option>
+                            <option value="average">Average Linkage</option>
+                            <option value="single">Single Linkage</option>
+                            <option value="complete">Complete Linkage</option>
+                        </select>
+                        <!--<div class="row-fluid">-->
+                        <!--<label class="custom-control custom-checkbox">-->
+                        <!--<input id="heatmapCenterScale" type="checkbox" class="custom-control-input" checked>-->
+                        <!--<span class="custom-control-indicator"></span>-->
+                        <!--<span class="custom-control-description">Center & Scale data first</span>-->
+                        <!--</label><br/>-->
+                        <!--</div>-->
+                        <div class="row-fluid">
+                            <button id="heatmapSubmit" type="button" class="btn btn-success" style="display: none;">Run Heatmap</button>
+                        </div>
+                        <br>
+                        <div class="row-fluid" id="subcohortSelectionFromHeatmapGroup" style="display: none">
+                            <button id="clearMarkedDonorsFromHeatmap" type="button" class="btn btn-secondary btn">Clear Marked Donors</button><br>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="heatmapSubcohortSelectionName" placeholder="Name Selection (enter to confirm)">
+                            </div>
+                            <div class="col-md-6">
+                                <button id="createSubcohortFromMarkedDonorsHeatmap" type="button" class="btn btn-secondary btn" style="display: none;">Subcohort from Marked</button>
+                            </div>
+                            <div id="heatmapSubcohortSelectionDescription">
+
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row-fluid" id="heatmapSubcohortMarkerGroup" style="display: none;">
+                            <select class="form-control" title="heatmapSubcohortMarking" id="heatmapSubcohortMarkerSelector">
+                                <option value="-1">Select Subcohort</option>
+                            </select>
+                            <button id="submitSubcohortForMarkingHeatmap" type="button" class="btn btn-secondary btn" style="display: none">Mark Subcohort</button><br>
+                        </div>
+                        <br>
+                        <p>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#heatmapClusteringChoicesCollapse" aria-expanded="false" aria-controls="heatmapClusteringChoicesCollapse" id="heatmapClusteringChoicesCollapseControl" style="display: none">
+                                Top-N Phenotypes used for Clustering
+                            </a>
+                        </p>
+                        <div class="collapse" id="heatmapClusteringChoicesCollapse">
+                            <div id="heatmapClusteringChoices">
+
+                            </div>
+                        </div>
+                        <br>
+                        <p>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#heatmapMarkedPhenotypesCollapse" aria-expanded="false" aria-controls="heatmapMarkedPhenotypesCollapse" id="heatmapMarkedPhenotypesCollapseControl" style="display: none">
+                                Marked Phenotypes
+                            </a>
+                        </p>
+                        <div class="collapse" id="heatmapMarkedPhenotypesCollapse">
+                            <button id="heatmapLaunchConsensusPathDb" type="button" class="btn btn-secondary btn">ConsensusPathDB</button>
+                            <button id="heatmapLaunchGsea" type="button" class="btn btn-secondary btn">GSEA/MSigDB</button>
+                            <button id="heatmapLaunchReactome" type="button" class="btn btn-secondary btn">REACTOME</button>
+                            <button id="heatmapLaunchDavid" type="button" class="btn btn-secondary btn">DAVID</button>
+                            <button id="heatmapLaunchGreat" type="button" class="btn btn-secondary btn">GREAT</button>
+                            <div id="heatmapMarkedPhenotypes">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group" id="metadataControls" style="display: none">
+                        <p>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#miniSelectionCollapse" aria-expanded="false" aria-controls="miniSelectionCollapse">
+                                Build mini-selection from metadata column
+                            </a>
+                        </p>
+                        <div class="collapse" id="miniSelectionCollapse">
+                            <div class="input-group">
+                                <select class="form-control" title="subcohortSelection" id="miniSelectionBuilderSubgroupSelector"></select>
+                            </div>
+                            <div class="input-group">
+                                <select class="form-control" title="columnSelection" id="metadataMiniSelectionColumnSelector"></select>
+                            </div>
+                            <div id="miniSelectionBuilderArea">
+
+                            </div>
+                        </div>
+                        <br>
+                        <p>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#complexSelectionCollapse" aria-expanded="false" aria-controls="complexSelectionCollapse" id="complexSelectionCollapseControl" style="display: none">
+                                Build complex-selection from existing selections
+                            </a>
+                        </p>
+                        <div class="collapse" id="complexSelectionCollapse">
+                            <a href="https://github.com/mistic100/jQuery-QueryBuilder" target="_blank">Github</a>
+                            <div id="complexSelectionQueryBuilder">
+
+                            </div>
+                            <div id="complexSelectionWarningSpace">
+
+                            </div>
+                            <div class="row-fluid">
+                                <div class="col-md-4">
+                                    <button id="complexSelectionQueryBuilderReset" type="button" class="btn btn-secondary">Reset</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="complexSelectionName" placeholder="Name Selection (enter to confirm)">
+                                </div>
+                                <div class="col-md-4">
+                                    <button id="complexSelectionQueryBuilderGet" type="button" class="btn btn-primary">Get</button>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <p>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#selectionToCategoricalCollapse" aria-expanded="false" aria-controls="selectionToCategoricalCollapse" id="selectionToCategoricalCollapseControl" style="display: none">
+                                Create new categorical variable column from existing selections
+                            </a>
+                        </p>
+                        <div class="collapse" id="selectionToCategoricalCollapse">
+                            <div class="row-fluid" id="selectionToCategoricalCheckboxes">
+
+                            </div>
+                            <button id="selectionToCategoricalSubmit" type="button" class="btn btn-success">Submit Choice</button>
+                        </div>
+                        <p>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#categoricalToSelectionCollapse" aria-expanded="false" aria-controls="categoricalToSelectionCollapse" id="categoricalToSelectionCollapseControl" style="display: none">
+                                Divide categorical metadata variable into selections
+                            </a>
+                        </p>
+                        <div class="collapse" id="categoricalToSelectionCollapse">
+
+                        </div>
+                    </div>
+                    <div class="input-group" id="volcanoControls" style="display: none">
+                    </div>
+                    <br>
+                    <div class="panel panel-default" id="fontPanel">
+                        <p>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#fontControlsCollapse" aria-expanded="false" aria-controls="fontControlsCollapse" id="fontControlsCollapseControl" style="display: none">
+                                Font Settings
+                            </a>
+                        </p>
+                        <div class="collapse" id="fontControlsCollapse">
+                            <div id="variantViewFontControls">
+                                <select class="form-control" title="variantViewFontTargetSelection" id="variantViewFontTargetSelector">
+                                    <option value="-1">Select Font Target</option>
+                                    <option value="title">Title</option>
+                                    <option value="chromosomeLabels">Chromosome Name Labels</option>
+                                    <option value="verticalAxisLabels">Recurrence Axis Labels</option>
+                                    <option value="horizontalAxisLabels">Chromosome Axis Labels</option>
+                                    <option value="cytobandAndGeneLabels">Cytoband & Gene Labels</option>
+                                </select>
+                            </div>
+                            <div id="singlePhenotypeExpressionFontControls">
+                                <select class="form-control" title="singlePhenotypeExpressionFontTargetSelection" id="singlePhenotypeExpressionFontTargetSelector">
+                                    <option value="-1">Select Font Target</option>
+                                    <option value="title">Title</option>
+                                    <option value="expressionQuantityLabels">Expression Quantity Labels</option>
+                                    <option value="expressionQuantityTitle">Expression Quantity Axis Title</option>
+                                    <option value="donorLabels">Donor Labels</option>
+                                </select>
+                            </div>
+                            <div id="survivalFontControls">
+                                <select class="form-control" title="survivalFontTargetSelection" id="survivalFontTargetSelector">
+                                    <option value="-1">Select Font Target</option>
+                                    <option value="title">Title</option>
+                                    <option value="xAxisLabels">X-Axis (OS) Labels</option>
+                                    <option value="xAxisTitle">X-Axis (OS) Title</option>
+                                    <option value="yAxisLabels">Y-Axis (Cohort Ratio) Labels</option>
+                                </select>
+                            </div>
+                            <div id="flexiblePlotFontControls">
+                                <select class="form-control" title="flexiblePlotFontTargetSelection" id="flexiblePlotFontTargetSelector">
+                                    <option value="-1">Select Font Target</option>
+                                    <option value="donorLabels">Donor Labels</option>
+                                    <option value="xAxisLabels">X-Axis Labels</option>
+                                    <option value="xAxisTitle">X-Axis Title</option>
+                                    <option value="yAxisLabels">Y-Axis Labels</option>
+                                    <option value="yAxisTitle">Y-Axis Title</option>
+                                    <option value="legendLabels">Legend Text</option>
+                                </select>
+                            </div>
+                            <div id="heatmapFontControls">
+                                <select class="form-control" title="heatmapFontTargetSelection" id="heatmapFontTargetSelector">
+                                    <option value="-1">Select Font Target</option>
+                                    <option value="donorLabels">Donor Labels</option>
+                                    <option value="markedElementLabels">Phenotype Labels</option>
+                                </select>
+                            </div>
+                            <div id="volcanoFontControls">
+                                <select class="form-control" title="volcanoFontTargetSelection" id="volcanoFontTargetSelector">
+                                    <option value="-1">Select Font Target</option>
+                                    <option value="title">Title</option>
+                                    <option value="xAxisLabels">X-Axis Labels</option>
+                                    <option value="xAxisTitle">X-Axis Title</option>
+                                    <option value="yAxisLabels">Y-Axis Labels</option>
+                                    <option value="yAxisTitle">Y-Axis Title</option>
+                                    <option value="markedElementLabels">Marked Element Labels</option>
+                                </select>
+                            </div>
+                            <div id="commonFontControls">
+                                <select class="form-control" title="fontSelection" id="fontSelector">
+                                    <option style='font-family: "Noto Sans", sans-serif'>Noto Sans</option>
+                                    <option style="font-family: Arial, sans-serif">Arial</option>
+                                    <option style="font-family: Helvetica, sans-serif">Helvetica</option>
+                                    <option style='font-family: "Times New Roman", serif'>Times New Roman</option>
+                                    <option style="font-family: 'Courier New', sans-serif">Courier New</option>
+                                    <option style="font-family: Verdana, sans-serif">Verdana</option>
+                                    <option style="font-family: Georgia, sans-serif">Georgia</option>
+                                    <option style="font-family: 'URW Bookman', sans-serif">Bookman</option>
+                                </select>
+                                <select class="form-control" title="fontSizeSelection" id="fontSizeSelector">
+                                    <option value="0">0</option>
+                                </select>
+                                <div class="row-fluid">
+                                    <button type="button" class="btn btn-default" id="boldFontSettingButton">
+                                        <span class="glyphicon glyphicon-bold" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                <div class="row-fluid">
+                                    <button type="button" class="btn btn-default" id="italicFontSettingButton">
+                                        <span class="glyphicon glyphicon-italic" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default" id="tsvExportPanel">
+                        <p>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#tsvExportControlsCollapse" aria-expanded="false" aria-controls="tsvExportControlsCollapse" id="tsvExportControlsCollapseControl" style="display: none">
+                                Data (.tsv) Export Options
+                            </a>
+                        </p>
+                        <div class="collapse" id="tsvExportControlsCollapse">
+                            <div id="variantViewTsvExportControls">
+                                <select class="form-control" title="variantViewTsvExportTargetSelection" id="variantViewTsvExportTargetSelector">
+                                    <option value="-1">Select Export Target</option>
+                                    <option value="visibleSv">Visible Structural Variant Data</option>
+                                    <option value="visibleSmallvar">Visible Small Variant Data</option>
+                                </select>
+                            </div>
+                            <div id="metadataTsvExportControls">
+                                <select class="form-control" title="metadataTsvExportTargetSelection" id="metadataTsvExportTargetSelector">
+                                    <option value="-1">Select Export Target</option>
+                                    <option value="0">Cohort Metadata</option>
+                                </select>
+                            </div>
+                            <div id="singlePhenotypeExpressionTsvExportControls">
+                                <select class="form-control" title="singlePhenotypeExpressionTsvExportTargetSelection" id="singlePhenotypeExpressionTsvExportTargetSelector">
+                                    <option value="-1">Select Export Target</option>
+                                    <option value="0">Current Expression Data</option>
+                                </select>
+                            </div>
+                            <div id="survivalTsvExportControls">
+                                <select class="form-control" title="survivalTsvExportTargetSelection" id="survivalTsvExportTargetSelector">
+                                    <option value="-1">Select Export Target</option>
+                                    <option value="0">Visible Survival Data</option>
+                                </select>
+                            </div>
+                            <div id="flexiblePlotTsvExportControls">
+                                <select class="form-control" title="flexiblePlotTsvExportTargetSelection" id="flexiblePlotTsvExportTargetSelector">
+                                    <option value="-1">Select Export Target</option>
+                                    <option value="0">Current Plot Data</option>
+                                </select>
+                            </div>
+                            <div id="volcanoTsvExportControls">
+                                <select class="form-control" title="volcanoTsvExportTargetSelection" id="volcanoTsvExportTargetSelector">
+                                    <option value="-1">Select Export Target</option>
+                                    <option value="0">Visible Volcano Data</option>
+                                </select>
+                            </div>
+                            <div id="commonTsvExportControls" style="display: none">
+                                <button id="tsvExportSubmit" type="button" class="btn btn-success">Export to tsv</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+<!--<script type="text/javascript" src="excel-bootstrap-table-filter-bundle.js"></script>-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="https://rawgit.com/wenzhixin/bootstrap-table-fixed-columns/master/bootstrap-table-fixed-columns.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jQuery-QueryBuilder/dist/js/query-builder.standalone.min.js"></script>
+
+
+<script type="text/javascript" src="main.bundle.js"></script></body>
+<nav class="navbar navbar-fixed-bottom" style="visibility:hidden">
+    <div class="pull-left" style="visibility:visible">
+        <div id="epistemeCollapse" class="panel-collapse collapse" style="z-index:999;">
+            <p ><br>By Umut Toprak, Matthias Schlesner, Frank Westermann DKFZ Heidelberg</p>
+        </div>
+        <a class="navbar-brand" data-toggle="collapse" href="#epistemeCollapse" id="brandTitle">
+            EPISTEME
+        </a>
+    </div>
+    <div class="pull-right" style="visibility:visible">
+        <img src="DKFZ_Logo-Research_en_Black-Blue_CMYK.eps.png" id="instituteLogo">
+    </div>
+</nav>
+</html>

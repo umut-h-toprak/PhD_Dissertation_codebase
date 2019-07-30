@@ -1,0 +1,5 @@
+if (!require("scales")) install.packages("scales")
+library(ggplot2)
+grandDf=read.delim("grandResults.tsv",stringsAsFactors = FALSE)
+grandPlot=ggplot(grandDf,aes(x=group,y=minutes))+geom_violin(position = "dodge")+geom_jitter(size=0.3)+scale_y_continuous(name="CPU Time (minutes)")+scale_x_discrete(name="")+ theme_classic()
+ggsave("timing.pdf",grandPlot)

@@ -1,0 +1,13 @@
+geneId	integer	UINDEX
+chromosomeIndex	integer	
+startPos	integer	
+endPos	integer	
+geneTypeIndex	integer	INDEX
+cytobandIndices	text	
+tadIndices	text	
+geneName	text	
+cancerGene	boolean	INDEX
+rppaIds	text
+batch	integer	INDEX
+reactomePathwayIds	text	
+orientation	integer	

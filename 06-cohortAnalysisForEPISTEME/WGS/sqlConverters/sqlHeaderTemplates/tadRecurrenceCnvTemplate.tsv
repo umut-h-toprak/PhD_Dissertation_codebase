@@ -1,0 +1,4 @@
+tadIndex	integer	UINDEX
+lossDonors	text	
+gainDonors	text	
+lohDonors	text	

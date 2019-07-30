@@ -1,0 +1,10 @@
+variantTypeIndex	variantDesc	colourId
+0	an INVersion	0
+1	a TRAnslocation	8
+2	a DELetion	9
+3	a DUPlication	5
+4	a small DELetion	9
+5	a small INSertion	5
+6	a V(D)J TRAnslocation	10
+7	a V(D)J TRAnslocation	10
+8	an SNV	0

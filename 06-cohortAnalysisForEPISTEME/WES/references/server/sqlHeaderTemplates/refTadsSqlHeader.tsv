@@ -1,0 +1,6 @@
+tadIndex	integer	UINDEX
+chromosomeIndex	integer	
+startPos	integer	
+endPos	integer	
+cytobandIndices	text	
+geneIndices	text	

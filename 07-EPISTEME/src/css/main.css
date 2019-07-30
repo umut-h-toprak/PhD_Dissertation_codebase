@@ -1,0 +1,278 @@
+html {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    position: relative;
+    min-height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+.pull-right {
+    float: right !important;
+}
+
+body {
+    /*font-family: "Helvetica Neue", Verdana, Helvetica, Arial, sans-serif;*/
+    /*line-height: 1.5;*/
+    margin:0;
+    padding:0;
+    margin-top:10px;
+    margin-bottom: 60px;
+    margin-left: 0px;
+    font-size: 14px;
+    overflow-y: scroll;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.markerCircle{
+    fill: red;
+}
+
+.markerTextCohort{
+    text-align: center !important;
+}
+
+
+h3{
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+    text-align: center !important;
+}
+.acknowledgement{
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+    text-align: left !important;
+}
+.svg-container, .svg-content-responsive{
+    display: block;
+    overflow: visible;
+}
+
+/*h2 {*/
+    /*margin-top: 1.3em;*/
+/*}*/
+
+a {
+    color: #0083e8;
+}
+
+/*b, strong {*/
+    /*font-weight: 600 !important;*/
+/*}*/
+
+samp {
+    display: none;
+}
+
+img {
+    animation: colorize 2s cubic-bezier(0, 0, .78, .36) 1;
+    background: transparent;
+    border: 10px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    display: block;
+    margin: 1.3em auto;
+    max-width: 95%;
+}
+
+@keyframes colorize {
+    0% {
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+    }
+    100% {
+        -webkit-filter: grayscale(0%);
+        filter: grayscale(0%);
+    }
+}
+
+#displayPorts d {
+    color : white;
+    background-color: #428bca;
+    padding : 0px 0px;
+}
+#annotationPorts d {
+    color : white;
+    background-color: #428bca;
+    padding : 0px 0px;
+}
+.markerText, .igSvLabel, .igSvLabelSecondary, .geneMarker,.cytobandMarker, .geneMarkerVolcano, .chrLabel, .radialAxis1, .radialAxis2, .radialAxis3, .axis, #brandTitle, .navbar-brand, #instituteLogo,.geneMarkerText,.cytobandMarkerText,.markerTextCohort, .btn{
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.cytBlck0{
+    stroke: None;
+    fill:#000000;
+}
+.cytBlck1{
+    stroke: None;
+    fill:DarkGray;
+}
+.cytBlck2{
+    stroke: None;
+    fill:DimGray;
+}
+.cytBlck3{
+    stroke: None;
+    fill:Gainsboro;
+}
+.cytBlck4{
+    stroke: None;
+    fill:LightGray;
+}
+.cytBlck5{
+    stroke: None;
+    fill:Red;
+}
+.cytBlck6{
+    stroke: None;
+    fill:Teal;
+}
+.cytBlck7{
+    stroke: None;
+    fill:White;
+}
+.cytBlck8{
+    stroke: None;
+    fill:Green;
+}
+.cytBlck10{
+    stroke: None;
+    fill:#ff7f00;
+}
+
+.variant0{
+    stroke-width: 1.5;
+    fill: none;
+    stroke: #000000;
+}
+.variant1{
+    stroke-width: 1.5;
+    fill: none;
+    stroke: green;
+}
+.variant2{
+    stroke-width: 1.5;
+    fill: none;
+    stroke: blue;
+}
+.variant3{
+    stroke-width: 1.5;
+    fill: none;
+    stroke: red;
+}
+.variant4{
+    stroke-width: 1.5;
+    fill: none;
+    stroke: blue;
+}
+.variant5{
+    stroke-width: 1.5;
+    fill: none;
+    stroke: red;
+}
+.variant6{
+    stroke-width: 1.5;
+    fill: none;
+    stroke: #ff7f00;
+}
+.variant7{
+    stroke-width: 1.5;
+    fill: none;
+    stroke: #ff7f00;
+}
+.variant8{
+    stroke-width: 1.5;
+    fill: none;
+    stroke: #000000;
+}
+.variant9{
+    stroke-width: 1.5;
+    fill: none;
+    stroke: darkviolet;
+}
+
+.radialAxis3{
+    font-weight: bold;
+}
+.slider.slider-horizontal{
+    width: 400px;
+    margin-left: 10px;
+    /*margin-right: 10px;*/
+    margin-top: 3px;
+    margin-bottom: 7px;
+}
+.input-group {
+    display: inline-table;
+}
+#selectorField{
+    white-space: nowrap;
+}
+#cohortSelector{
+    display: inline-flex;
+    overflow: hidden;
+}
+#geneExpressionSelector{
+    display: inline-flex;
+}
+#survivalSVG{
+    position: relative;
+    left: 50%;
+    -webkit-transform: translate(-50%,-10%);
+    -ms-transform: translate(-50%,-10%);
+    transform: translate(-50%,-10%);
+    overflow: visible;
+}
+#geneSvg{
+    position: relative;
+    left: 50%;
+    -webkit-transform: translate(-50%,-10%);
+    -ms-transform: translate(-50%,-10%);
+    transform: translate(-50%,-10%);
+    overflow: visible;
+}
+#geneVolcanoSvg{
+    overflow: visible;
+}
+#geneSvgAux{
+    overflow: visible;
+}
+.textPath, .geneMarker, .geneMarkerHelper,.cytobandMarker,.cytobandMarkerHelper{
+    overflow: visible;
+    white-space: nowrap;
+}
+
+@font-face {
+    font-family: 'hellenic';
+    src: url("./fonts/ancienthellenic/ancienthellenic-webfont.woff") format('woff'),url("./fonts/ancienthellenic/ancienthellenic-webfont.ttf") format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+.navbar-brand{
+    margin-top: 0;
+    padding: 5px;
+}
+#brandTitle{
+    margin-top: 0;
+    font: 64px hellenic;
+}
+
+#instituteLogo{
+    width:282px;
+    height:48px;
+    border:0
+}
+.content_center {
+    align-items: center;
+}
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.bootstrap-table .table {
+    height: auto !important;
+}

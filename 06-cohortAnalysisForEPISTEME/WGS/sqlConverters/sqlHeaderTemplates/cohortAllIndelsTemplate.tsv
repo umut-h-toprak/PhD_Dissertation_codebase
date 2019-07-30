@@ -1,0 +1,12 @@
+indelIndex	integer	UINDEX
+chrIndex	integer	
+pos	integer	
+ref	text	
+alt	text	
+gene	text	INDEX
+smallVarType	integer	
+tadIndicesOffset0	text	
+tadIndicesOffset1	text	
+tadIndicesOffset2	text	
+tadIndicesOffset3	text	
+donor	integer	INDEX

@@ -1,0 +1,3 @@
+rppaId	integer	UINDEX
+rppaName	text
+geneIds	text	

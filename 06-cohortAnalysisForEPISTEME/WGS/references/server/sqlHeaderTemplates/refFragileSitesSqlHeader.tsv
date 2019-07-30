@@ -1,0 +1,5 @@
+fragileSiteIndex	integer	UINDEX
+chromosomeIndex	integer	
+startPos	integer	
+endPos	integer	
+fragileSiteNames	text	

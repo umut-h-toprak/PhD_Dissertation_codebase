@@ -1,0 +1,5 @@
+volcanoItemIndex	integer	UINDEX
+gene1	integer	INDEX
+gene2	integer	INDEX
+pearsonR	float	
+log10PearsonP	float	

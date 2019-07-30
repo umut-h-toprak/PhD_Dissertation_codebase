@@ -1,0 +1,5 @@
+tadIndex	integer	UINDEX
+offset0donors	text	
+offset1donors	text	
+offset2donors	text	
+offset3donors	text	
